@@ -15,13 +15,13 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "notabenedev\\SiteBlocks\\": "src/"
+            "Notabenedev\\SiteBlocks\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "notabenedev\\SiteBlocks\\SiteBlocksServiceProvider"
+                "Notabenedev\\SiteBlocks\\SiteBlocksServiceProvider"
             ]
         }
     }
