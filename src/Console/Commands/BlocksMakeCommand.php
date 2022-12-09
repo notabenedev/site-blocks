@@ -2,12 +2,10 @@
 
 namespace Notabenedev\SiteBlocks\Console\Commands;
 
-use App\Menu;
-use App\MenuItem;
 use PortedCheese\BaseSettings\Console\Commands\BaseConfigModelCommand;
 
 
-class SiteBlocksMakeCommand extends BaseConfigModelCommand
+class BlocksMakeCommand extends BaseConfigModelCommand
 {
     /**
      * The name and signature of the console command.
@@ -15,12 +13,10 @@ class SiteBlocksMakeCommand extends BaseConfigModelCommand
      * @var string
      */
     protected $signature = 'make:blocks
-        {--all : Run all}
-        {--models : Export models}
-        {--policies : Export and create rules} 
-        {--only-default : Create only default rules}
-    ';
-
+                    {--all : Run all}
+                    {--models : Export models}
+                    {--policies : Export and create rules} 
+                    {--only-default : Create only default rules}';
 
     /**
      * The console command description.

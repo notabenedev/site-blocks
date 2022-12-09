@@ -2,7 +2,7 @@
 
 namespace Notabenedev\SiteBlocks;
 use Illuminate\Support\ServiceProvider;
-use Notabenedev\SiteBlocks\Console\Commands\SiteBlocksMakeCommand;
+use Notabenedev\SiteBlocks\Console\Commands\BlocksMakeCommand;
 
 class SiteBlocksServiceProvider extends ServiceProvider
 {
@@ -20,7 +20,7 @@ class SiteBlocksServiceProvider extends ServiceProvider
         // Console
         if ($this->app->runningInConsole()){
             $this->commands([
-                SiteBlocksMakeCommand::class,
+               BlocksMakeCommand::class
             ]);
         }
     }

@@ -13,6 +13,10 @@
         }
     ],
     "minimum-stability": "dev",
+    "require": {
+        "portedcheese/base-settings": "^3.0",
+        "portedcheese/admin-site-menu": "^1.6"
+    },
     "autoload": {
         "psr-4": {
             "Notabenedev\\SiteBlocks\\": "src/"
