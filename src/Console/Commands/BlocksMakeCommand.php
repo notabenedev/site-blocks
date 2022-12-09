@@ -18,6 +18,7 @@ class BlocksMakeCommand extends BaseConfigModelCommand
                     {--models : Export models}
                     {--policies : Export and create rules} 
                     {--only-default : Create only default rules}
+                    {--controllers : Export controllers}
                     ';
 
     /**
@@ -75,6 +76,12 @@ class BlocksMakeCommand extends BaseConfigModelCommand
            ],
        ];
 
+    /**
+     * Make Controllers
+     */
+    protected $controllers = [
+        "Admin" => ["BlockGroupController", "BlockController"],
+    ];
 
     /**
      * Create a new command instance.
@@ -116,8 +123,9 @@ class BlocksMakeCommand extends BaseConfigModelCommand
         if ($this->option("policies") || $all) {
             $this->makeRules();
         }
-
-
+        if ($this->option("controllers") || $all) {
+            $this->exportControllers("Admin");
+        }
 
         return 0;
     }

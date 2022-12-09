@@ -35,17 +35,19 @@ class Block extends Model
             $model->forgetCache();
         });
 
-        static::deleting(function (\App\Block $model) {
-            $model->blockable()->sync([]);
-        });
         static::deleted(function (\App\Block $model) {
             // Забыть кэш.
             $model->forgetCache();
         });
     }
 
-    public function group(){
-        return $this->belongsTo(App\BlockGroup::class,"block_group_id");
+    /**
+     * Группа блока
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function blockGroup(){
+        return $this->belongsTo(\App\BlockGroup::class);
     }
 
     /**
@@ -95,6 +97,25 @@ class Block extends Model
             Cache::forget("block-teaser:{$this->id}-6");
         }
 
+    }
+
+    /**
+     * Обновить отделы.
+     *
+     * @param $userInput
+     */
+    public function updateGroup($userInput)
+    {
+        $groupId = null;
+        foreach ($userInput as $key => $value) {
+            if (strstr($key, "check-") == false) {
+                continue;
+            }
+            $groupId = $value;
+        }
+        $this->block_group_id = $groupId;
+        $this->save();
+        $this->forgetCache();
     }
 
 }

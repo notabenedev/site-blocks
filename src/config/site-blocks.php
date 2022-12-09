@@ -16,4 +16,6 @@ return [
     'models' => array(
         'page' => 'App\Page',
     ),
+    "sitePackageName" => "Блоки",
+    "blocksAdminRoutes" => true,
 ];

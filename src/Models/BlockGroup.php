@@ -57,11 +57,11 @@ class BlockGroup extends Model
     /**
      * Блоки группы
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
      */
     public function blocks(){
-        return $this->belongsToMany(\App\Block::class)->orderBy("priority")
-            ->withTimestamps();
+        return $this->hasMany(\App\Block::class)->orderBy("priority");
     }
 
     /**
@@ -143,4 +143,17 @@ class BlockGroup extends Model
         return $model;
     }
 
+    /**
+     * Get no models groups
+     *
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function getFree(){
+        $query = self::query();
+        return $query
+            ->whereNull("blockable_type")
+            ->whereNull("blockable_id")
+            ->orderBy("title")
+            ->get();
+    }
 }
