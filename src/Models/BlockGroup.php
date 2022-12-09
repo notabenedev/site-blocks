@@ -4,12 +4,8 @@ namespace Notabenedev\SiteBlocks\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
-use Notabenedev\SiteStaff\Facades\StaffDepartmentActions;
 use PortedCheese\BaseSettings\Traits\ShouldSlug;
-use PortedCheese\SeoIntegration\Traits\ShouldMetas;
 
 class BlockGroup extends Model
 {

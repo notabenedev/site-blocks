@@ -2,6 +2,7 @@
 
 namespace Notabenedev\SiteBlocks\Console\Commands;
 
+use App\BlockGroup;
 use PortedCheese\BaseSettings\Console\Commands\BaseConfigModelCommand;
 
 
@@ -16,7 +17,8 @@ class BlocksMakeCommand extends BaseConfigModelCommand
                     {--all : Run all}
                     {--models : Export models}
                     {--policies : Export and create rules} 
-                    {--only-default : Create only default rules}';
+                    {--only-default : Create only default rules}
+                    ';
 
     /**
      * The console command description.
@@ -64,6 +66,15 @@ class BlocksMakeCommand extends BaseConfigModelCommand
         ],
     ];
 
+   protected $fill =
+       [
+           [
+               "title" => "Вопрос-Ответ",
+               "slug" => "faq",
+               "template" => "site-blocks::site.block-groups.templates.accordion",
+           ],
+       ];
+
 
     /**
      * Create a new command instance.
@@ -86,11 +97,27 @@ class BlocksMakeCommand extends BaseConfigModelCommand
 
         if ($this->option("models") || $all) {
             $this->exportModels();
+            foreach ($this->fill as $fill){
+                try {
+                    $group = BlockGroup::query()
+                        ->where("slug", $fill["slug"])
+                        ->where('title', $fill["title"])
+                        ->firstOrFail();
+                    $group->update($fill);
+                    $this->info("Группа блоков ".$fill["title"]." обновлена");
+                }
+                catch (\Exception $e) {
+                    BlockGroup::create($fill);
+                    $this->info("Группа блоков ".$fill["title"]." создана");
+                }
+            }
         }
 
         if ($this->option("policies") || $all) {
             $this->makeRules();
         }
+
+
 
         return 0;
     }
