@@ -4,6 +4,10 @@ namespace Notabenedev\SiteBlocks;
 use App\BlockGroup;
 use Illuminate\Support\ServiceProvider;
 use Notabenedev\SiteBlocks\Console\Commands\BlocksMakeCommand;
+use Notabenedev\SiteBlocks\Listeners\BlockGroupsPriorityClearCache;
+use Notabenedev\SiteBlocks\Listeners\ClearCacheOnUpdateImage;
+use PortedCheese\BaseSettings\Events\ImageUpdate;
+use PortedCheese\BaseSettings\Events\PriorityUpdate;
 
 class SiteBlocksServiceProvider extends ServiceProvider
 {
@@ -33,6 +37,24 @@ class SiteBlocksServiceProvider extends ServiceProvider
 
         // Подключение шаблонов.
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'site-blocks');
+        $this->layoutExtend();
+
+        // Подключаем изображения.
+        $imagecache = app()->config['imagecache.paths'];
+        $imagecache[] = 'storage/blocks/main';
+        app()->config['imagecache.paths'] = $imagecache;
+
+        // Подписаться на обновление изображений.
+        $this->app['events']->listen(ImageUpdate::class, ClearCacheOnUpdateImage::class);
+        $this->app['events']->listen(PriorityUpdate::class, BlockGroupsPriorityClearCache::class);
+    }
+
+    /**
+     * Расширить шаблоны
+     *
+     * @return void
+     */
+    protected function layoutExtend(){
         view()->composer([
             "site-blocks::admin.blocks.create",
             "site-blocks::admin.blocks.edit",
@@ -43,23 +65,27 @@ class SiteBlocksServiceProvider extends ServiceProvider
         view()->composer([
             "site-blocks::site.block-groups.templates.accordion",
         ], function ($view){
-            $blocks = null;
-            $group = null;
             try{
                 $group = BlockGroup::query()->where("slug","=","faq")->firstOrFail();
-                $blocks = $group->blocks;
+                $blocks = $group->getBlocksCache();
                 $view->with("group", $group);
                 $view->with("blocks", $blocks);
             }
             catch (\Exception $e){
             }
-
         });
-
-        // Подключаем изображения.
-        $imagecache = app()->config['imagecache.paths'];
-        $imagecache[] = 'storage/blocks/main';
-        app()->config['imagecache.paths'] = $imagecache;
+        view()->composer([
+            "site-blocks::site.block-groups.templates.about",
+        ], function ($view){
+            try{
+                $group = BlockGroup::query()->where("slug","=","about-company")->firstOrFail();
+                $blocks = $group->getBlocksCache();
+                $view->with("group", $group);
+                $view->with("blocks", $blocks);
+            }
+            catch (\Exception $e){
+            }
+        });
     }
 
     public function register()

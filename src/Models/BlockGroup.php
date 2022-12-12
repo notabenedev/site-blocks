@@ -32,15 +32,9 @@ class BlockGroup extends Model
             // Забыть кэш.
             $model->forgetCache();
         });
-        static::updated(function (\App\BlockGroup $model) {
-            // Забыть кэш.
-            $model->forgetCache();
-        });
 
         static::deleting(function (\App\BlockGroup $model) {
             $model->blockable()->sync([]);
-        });
-        static::deleted(function (\App\BlockGroup $model) {
             // Забыть кэш.
             $model->forgetCache();
         });
@@ -89,7 +83,7 @@ class BlockGroup extends Model
 
 
     /**
-     * Получить тизер
+     * Получить группу
      *
      * @return string
      * @throws \Throwable

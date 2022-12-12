@@ -25,17 +25,13 @@ class Block extends Model
     protected static function booting() {
 
         parent::booting();
-        static::created(function (\App\Block $model){
-            // Забыть кэш.
-            $model->forgetCache();
-        });
 
         static::updated(function (\App\Block $model) {
             // Забыть кэш.
             $model->forgetCache();
         });
 
-        static::deleted(function (\App\Block $model) {
+        static::deleting(function (\App\Block $model) {
             // Забыть кэш.
             $model->forgetCache();
         });
@@ -68,19 +64,20 @@ class Block extends Model
      * @return string
      * @throws \Throwable
      */
-    public function getTeaser($grid = 4)
+    public function getTeaser($template, $first)
     {
-        $key = "block-teaser:{$this->id}-{$grid}";
+        //Cache::forget("block-teaser:{$this->id}-teaser-accordion}");
+        //Cache::forget("block-teaser:{$this->id}-teaser-about}");
+        $key = "block-teaser:{$this->id}-{teaser-$template}";
         $model = $this;
         $block = Cache::rememberForever($key, function () use ($model) {
             $image = $model->image;
-            $group = $model->group;
             return $model;
         });
 
-        $view = view("site-blocks::site.blocks.teaser", [
+        $view = view("site-blocks::site.blocks.teaser-$template", [
             'block' => $block,
-            'grid' => $grid,
+            'first' =>$first,
         ]);
         return $view->render();
     }
@@ -89,12 +86,11 @@ class Block extends Model
     /**
      * Очистить кэш.
      */
-    public function forgetCache($full = FALSE)
+    public function forgetCache()
     {
-        if (!$full) {
-            Cache::forget("block-teaser:{$this->id}-3");
-            Cache::forget("block-teaser:{$this->id}-4");
-            Cache::forget("block-teaser:{$this->id}-6");
+        $templates = ["accordion", "about"];
+        foreach ($templates as $template) {
+            Cache::forget("block-teaser:{$this->id}-{teaser-$template}");
         }
 
     }
@@ -116,6 +112,7 @@ class Block extends Model
         $this->block_group_id = $groupId;
         $this->save();
         $this->forgetCache();
+        $this->blockGroup->forgetCache();
     }
 
 }

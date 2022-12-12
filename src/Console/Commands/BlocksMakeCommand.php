@@ -77,6 +77,11 @@ class BlocksMakeCommand extends BaseConfigModelCommand
                "slug" => "faq",
                "template" => "site-blocks::site.block-groups.templates.accordion",
            ],
+           [
+               "title" => "О компании",
+               "slug" => "about-company",
+               "template" => "site-blocks::site.block-groups.templates.about",
+           ],
        ];
 
     /**

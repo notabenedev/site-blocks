@@ -63,13 +63,28 @@ class BlockController extends Controller
     public function store(Request $request)
     {
         $this->storeValidator($request->all());
-        $block = Block::create($request->all());
-        $block->uploadImage($request, "blocks/main");
-        $block->updateGroup($request->all(), true);
+
+        $group = $this->getGroup($request->all());
+        if (! empty($group)) {
+            $block = $group->blocks()->create($request->all());
+            $block->uploadImage($request, "blocks/main", "image");
+            $max = \App\Block::query()
+                ->where("block_group_id", $group->id)
+                ->max("priority");
+            $block->priority = $max + 1;
+            $group->forgetCache();
+        }
+        else{
+            $block = Block::create($request->all());
+            $block->uploadImage($request, "blocks/main");
+        }
+        $block->save();
+
         return redirect()
             ->route("admin.blocks.show", ['block' => $block])
             ->with('success', 'Успешно создано');
     }
+
 
     /**
      * Валидация сохранения.
@@ -127,13 +142,23 @@ class BlockController extends Controller
     public function update(Request $request, Block $block)
     {
         $this->updateValidator($request->all(), $block);
+
+        $group = $this->getGroup($request->all());
+        $groupOrigin = $block->blockGroup;
+
+        // set new group
         $block->update($request->all());
         $block->uploadImage($request, "blocks/main");
-        $block->updateGroup($request->all(), true);
+        $block->updateGroup($request->all());
+        $block->save();
+
+        //clear groups cache
+        $group->forgetCache();
+        $groupOrigin->forgetCache();
 
         return redirect()
             ->route('admin.blocks.show', ['block' => $block])
-            ->with('success', 'Успешно обновленно');
+            ->with('success', 'Успешно обновлено');
     }
 
     /**
@@ -208,5 +233,29 @@ class BlockController extends Controller
             ];
         }
         return view ("site-blocks::admin.block-groups.blocks-tree", ["groups" => $groups, "group" => $group]);
+    }
+
+    /**
+     * Get group from Input
+     *
+     * @param $userInput
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     */
+    protected function getGroup($userInput){
+        $groupId = null;
+        foreach ($userInput as $key => $value) {
+            if (strstr($key, "check-") == false) {
+                continue;
+            }
+            $groupId = $value;
+        }
+        try{
+            $group = BlockGroup::query()->findOrFail($groupId);
+            return $group;
+        }
+        catch (\Exception $exception){
+            return null;
+        }
+
     }
 }
