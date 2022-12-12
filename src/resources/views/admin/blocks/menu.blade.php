@@ -1,36 +1,36 @@
-@can("viewAny", \App\StaffDepartment::class)
+@can("viewAny", \App\BlockGroup::class)
     @if ($theme == "sb-admin")
-        @php($active = strstr($currentRoute, 'admin.employees') !== FALSE)
+        @php($active = strstr($currentRoute, 'admin.blocks.') !== FALSE)
         <li class="nav-item dropdown{{ $active ? ' active' : '' }}">
             <a class="nav-link"
                href="#"
                data-toggle="collapse"
-               data-target="#collapse-departments-menu"
-               aria-controls="#collapse-departments-menu"
+               data-target="#collapse-blocks-groups-menu"
+               aria-controls="#collapse-blocks-groups-menu"
                aria-expanded="{{ $active ? "true" : "false" }}">
                 @isset($ico)
                     <i class="{{ $ico }}"></i>
                 @endisset
-                <span>{{ config("site-staff.siteEmployeeName") }}</span>
+                <span>{{ config("site-blocks.sitePackageName") }}</span>
             </a>
-            <div id="collapse-departments-menu" class="collapse{{ $active ? " show" : "" }}" data-parent="#accordionSidebar">
+            <div id="collapse-blocks-groups-menu" class="collapse{{ $active ? " show" : "" }}" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a href="{{ route('admin.employees.index') }}"
-                       class="collapse-item{{ strstr($currentRoute, 'admin.employees.') !== FALSE  ? " active" : "" }}">
-                        <span>{{ config("site-staff.siteEmployeeName") }}</span>
+                    <a href="{{ route('admin.blocks.index') }}"
+                       class="collapse-item{{ (strstr($currentRoute, 'admin.blocks.') !== FALSE && strstr($currentRoute, 'admin.blocks.groups') == FALSE)  ? " active" : "" }}">
+                        <span>Блоки</span>
                     </a>
-                    <a href="{{ route('admin.departments.index') }}"
-                       class="collapse-item{{strstr($currentRoute, 'admin.departments') !== FALSE ? ' active' : '' }}">
-                        <span>{{ config("site-staff.siteDepartmentName") }}</span>
+                    <a href="{{ route('admin.blocks.groups.index') }}"
+                       class="collapse-item{{strstr($currentRoute, 'admin.blocks.groups') !== FALSE ? ' active' : '' }}">
+                        <span>Группы блоков</span>
                     </a>
                 </div>
             </div>
         </li>
     @else
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle{{ strstr($currentRoute, 'admin.employees') !== FALSE ? ' active' : '' }}"
+            <a class="nav-link dropdown-toggle{{ strstr($currentRoute, 'admin.blocks') !== FALSE ? ' active' : '' }}"
                href="#"
-               id="user-dropdown"
+               id="blocks-groups-dropdown"
                role="button"
                data-toggle="dropdown"
                aria-haspopup="true"
@@ -38,16 +38,16 @@
                 @isset($ico)
                     <i class="{{ $ico }}"></i>
                 @endisset
-                {{ config("site-staff.sitePackageName") }}
+                {{ config("site-blocks.sitePackageName") }}
             </a>
-            <div class="dropdown-menu" aria-labelledby="user-dropdown">
-                <a href="{{ route('admin.employees.index') }}"
+            <div class="dropdown-menu" aria-labelledby="blocks-groups-dropdown">
+                <a href="{{ route('admin.blocks.index') }}"
                    class="dropdown-item">
-                    {{ config("site-staff.siteEmployeeName") }}
+                    Блоки
                 </a>
-                <a href="{{ route('admin.departments.index') }}"
+                <a href="{{ route('admin.blocks.groups.index') }}"
                    class="dropdown-item">
-                    {{ config("site-staff.siteDepartmentName") }}
+                    Группы блоков
                 </a>
             </div>
         </li>

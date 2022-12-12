@@ -3,6 +3,8 @@
 namespace Notabenedev\SiteBlocks\Console\Commands;
 
 use App\BlockGroup;
+use App\Menu;
+use App\MenuItem;
 use PortedCheese\BaseSettings\Console\Commands\BaseConfigModelCommand;
 
 
@@ -19,6 +21,7 @@ class BlocksMakeCommand extends BaseConfigModelCommand
                     {--policies : Export and create rules} 
                     {--only-default : Create only default rules}
                     {--controllers : Export controllers}
+                    {--menu : Make admin menu}
                     ';
 
     /**
@@ -123,10 +126,54 @@ class BlocksMakeCommand extends BaseConfigModelCommand
         if ($this->option("policies") || $all) {
             $this->makeRules();
         }
+
         if ($this->option("controllers") || $all) {
             $this->exportControllers("Admin");
         }
 
+        if ($this->option("menu") || $all) {
+            $this->makeMenu();
+        }
+
         return 0;
+    }
+
+    /**
+     * Make menu
+     *
+     * @return void
+     */
+    protected function makeMenu()
+    {
+        try {
+            $menu = Menu::query()
+                ->where('key', 'admin')
+                ->firstOrFail();
+        }
+        catch (\Exception $e) {
+            return;
+        }
+
+        $title = config("site-blocks.sitePackageName");
+        $itemData = [
+            'title' => $title,
+            'template' => "site-blocks::admin.blocks.menu",
+            'url' => "#",
+            'ico' => 'fas fa-th-large',
+            'menu_id' => $menu->id,
+        ];
+
+        try {
+            $menuItem = MenuItem::query()
+                ->where("menu_id", $menu->id)
+                ->where('title', $title)
+                ->firstOrFail();
+            $menuItem->update($itemData);
+            $this->info("Элемент меню '$title' обновлен");
+        }
+        catch (\Exception $e) {
+            MenuItem::create($itemData);
+            $this->info("Элемент меню '$title' создан");
+        }
     }
 }

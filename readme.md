@@ -6,4 +6,6 @@
                             {--all : Run all}
                             {--models : Export models}
                             {--policies : Export models}
+                            {--controllers : Export controllers}
+                            {--menu : Make admin menu}
     npm run dev
