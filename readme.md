@@ -8,4 +8,5 @@
                             {--policies : Export models}
                             {--controllers : Export controllers}
                             {--menu : Make admin menu}
+                            {--fill : create default groups from config fill array}
     npm run dev

@@ -16,6 +16,22 @@ return [
     'models' => array(
         'page' => 'App\Page',
     ),
+    'templates' => array(
+        "accordion",
+        "about",
+    ),
+    'fill' => array(
+        [
+            "title" => "Вопрос-Ответ",
+            "slug" => "faq",
+            "template" => "site-blocks::site.block-groups.templates.accordion",
+        ],
+        [
+            "title" => "О компании",
+            "slug" => "about-company",
+            "template" => "site-blocks::site.block-groups.templates.about",
+        ],
+    ),
     "sitePackageName" => "Блоки",
     "blocksAdminRoutes" => true,
 ];

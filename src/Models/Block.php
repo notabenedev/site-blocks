@@ -34,6 +34,9 @@ class Block extends Model
         static::deleting(function (\App\Block $model) {
             // Забыть кэш.
             $model->forgetCache();
+            if (! empty($model->blockGroup)){
+                $model->blockGroup->forgetCache();
+            }
         });
     }
 
@@ -92,7 +95,6 @@ class Block extends Model
         foreach ($templates as $template) {
             Cache::forget("block-teaser:{$this->id}-{teaser-$template}");
         }
-
     }
 
     /**

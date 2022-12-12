@@ -18,6 +18,7 @@ class BlocksMakeCommand extends BaseConfigModelCommand
     protected $signature = 'make:blocks
                     {--all : Run all}
                     {--models : Export models}
+                    {--fill : Fill groups}
                     {--policies : Export and create rules} 
                     {--only-default : Create only default rules}
                     {--controllers : Export controllers}
@@ -70,20 +71,6 @@ class BlocksMakeCommand extends BaseConfigModelCommand
         ],
     ];
 
-   protected $fill =
-       [
-           [
-               "title" => "Вопрос-Ответ",
-               "slug" => "faq",
-               "template" => "site-blocks::site.block-groups.templates.accordion",
-           ],
-           [
-               "title" => "О компании",
-               "slug" => "about-company",
-               "template" => "site-blocks::site.block-groups.templates.about",
-           ],
-       ];
-
     /**
      * Make Controllers
      */
@@ -112,7 +99,22 @@ class BlocksMakeCommand extends BaseConfigModelCommand
 
         if ($this->option("models") || $all) {
             $this->exportModels();
-            foreach ($this->fill as $fill){
+        }
+
+        if ($this->option("policies") || $all) {
+            $this->makeRules();
+        }
+
+        if ($this->option("controllers") || $all) {
+            $this->exportControllers("Admin");
+        }
+
+        if ($this->option("menu") || $all) {
+            $this->makeMenu();
+        }
+
+        if ($this->option("fill") || $all) {
+            foreach (config("site-blocks.fill", []) as $fill){
                 try {
                     $group = BlockGroup::query()
                         ->where("slug", $fill["slug"])
@@ -126,18 +128,6 @@ class BlocksMakeCommand extends BaseConfigModelCommand
                     $this->info("Группа блоков ".$fill["title"]." создана");
                 }
             }
-        }
-
-        if ($this->option("policies") || $all) {
-            $this->makeRules();
-        }
-
-        if ($this->option("controllers") || $all) {
-            $this->exportControllers("Admin");
-        }
-
-        if ($this->option("menu") || $all) {
-            $this->makeMenu();
         }
 
         return 0;

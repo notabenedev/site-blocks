@@ -2,6 +2,7 @@
 
 namespace Notabenedev\SiteBlocks;
 use App\BlockGroup;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Notabenedev\SiteBlocks\Console\Commands\BlocksMakeCommand;
 use Notabenedev\SiteBlocks\Listeners\BlockGroupsPriorityClearCache;
@@ -55,6 +56,7 @@ class SiteBlocksServiceProvider extends ServiceProvider
      * @return void
      */
     protected function layoutExtend(){
+        // admin
         view()->composer([
             "site-blocks::admin.blocks.create",
             "site-blocks::admin.blocks.edit",
@@ -62,30 +64,31 @@ class SiteBlocksServiceProvider extends ServiceProvider
             $groups = BlockGroup::getFree();
             $view->with("groups", $groups);
         });
-        view()->composer([
-            "site-blocks::site.block-groups.templates.accordion",
-        ], function ($view){
-            try{
-                $group = BlockGroup::query()->where("slug","=","faq")->firstOrFail();
-                $blocks = $group->getBlocksCache();
-                $view->with("group", $group);
-                $view->with("blocks", $blocks);
-            }
-            catch (\Exception $e){
-            }
-        });
-        view()->composer([
-            "site-blocks::site.block-groups.templates.about",
-        ], function ($view){
-            try{
-                $group = BlockGroup::query()->where("slug","=","about-company")->firstOrFail();
-                $blocks = $group->getBlocksCache();
-                $view->with("group", $group);
-                $view->with("blocks", $blocks);
-            }
-            catch (\Exception $e){
-            }
-        });
+
+        // home blocks (config: fill array)
+        $defaultBlocks = config("site-blocks.fill", []);
+        foreach ( $defaultBlocks as $default){
+            view()->composer([
+                $default["template"],
+            ], function ($view){
+                // find slug
+                foreach (config("site-blocks.fill", []) as $default){
+                    if($default["template"] == $view->name()) {
+                        $slug = $default["slug"];
+                        try{
+                            $group = BlockGroup::query()->where("slug","=", $slug)->firstOrFail();
+                            $blocks = $group->getBlocksCache();
+                            $view->with("group", $group);
+                            $view->with("blocks", $blocks);
+                        }
+                        catch (\Exception $e){
+                        }
+                        break;
+                    }
+                }
+
+            });
+        }
     }
 
     public function register()

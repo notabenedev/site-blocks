@@ -2,11 +2,11 @@
     <div class="card-header blocks-accrordion__card-header" id="accordionBlockGroup{{ $block->blockGroup->slug }}Heading{{ $block->slug }}">
         <h2 class="mb-0 blocks-accrordion__card-h2">
             <a class="btn btn-link btn-block text-left
-{{--{{ isset($first) ? "" : " collapsed" }}--}}
+{{ !empty($first) ? "" : " collapsed" }}
                     "
                data-toggle="collapse"
                data-target="#collapse{{ $block->slug }}"
-{{--               aria-expanded="{{ isset($first) ? "true" : "false" }}"--}}
+               aria-expanded="{{ !empty($first) ? "true" : "false" }}"
                aria-controls="collapse{{ $block->slug }}">
                 {{ $block->title }}
             </a>
@@ -15,7 +15,7 @@
 
     <div id="collapse{{ $block->slug }}"
          class="collapse blocks-accrordion__collapse
-{{--{{isset($first) ? " show" : "" }}--}}
+{{ !empty($first) ? " show" : "" }}
                  "
          aria-labelledby="accordionBlockGroup{{ $block->blockGroup->slug }}Heading{{ $block->slug }}"
          data-parent="#accordionBlockGroup{{ $block->blockGroup->slug }}">
