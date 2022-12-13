@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 class BlockGroupController extends Controller
 {
 
+    const PAGER = 20;
+
     public function __construct()
     {
         parent::__construct();
@@ -26,12 +28,16 @@ class BlockGroupController extends Controller
     public function index(Request $request)
     {
         $view = $request->get("view","default");
+        $query = $request->query;
+        $pager = config("site-blocks.adminPager", 20);
 
         $collection = BlockGroup::query()
             ->orderBy("title","asc");
-        $groups = $collection->get();
+        $groups = $collection->paginate($pager)->appends($request->input());
+        $per = $pager;
+        $page = $query->get('page', 1) - 1;
 
-        return view("site-blocks::admin.block-groups.index", compact("groups"));
+        return view("site-blocks::admin.block-groups.index", compact("groups", "per","page"));
     }
 
     /**

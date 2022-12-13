@@ -13,4 +13,13 @@
             </div>
         </div>
     </div>
+    @if ($groups->lastPage() > 1)
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    {{ $groups->links() }}
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection

@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Validator;
 class BlockController extends Controller
 {
 
-    const PAGER = 20;
-
     public function __construct()
     {
         parent::__construct();
@@ -30,6 +28,7 @@ class BlockController extends Controller
     {
         $query = $request->query;
         $blocks = Block::query();
+        $pager = config("site-blocks.adminPager", 20);
 
         if ($query->get('title')) {
             $title = trim($query->get('title'));
@@ -37,9 +36,9 @@ class BlockController extends Controller
         }
         $blocks->orderBy('created_at', 'desc');
         return view("site-blocks::admin.blocks.index", [
-            'blocksList' => $blocks->paginate(self::PAGER)->appends($request->input()),
+            'blocksList' => $blocks->paginate($pager)->appends($request->input()),
             'query' => $query,
-            'per' => self::PAGER,
+            'per' => $pager,
             'page' => $query->get('page', 1) - 1
         ]);
     }

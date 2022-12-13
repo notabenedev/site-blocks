@@ -34,4 +34,5 @@ return [
     ),
     "sitePackageName" => "Блоки",
     "blocksAdminRoutes" => true,
+    "adminPager" => 20,
 ];
