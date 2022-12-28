@@ -6,20 +6,23 @@ return [
         |-------------------------------------
         |
         | Можно перечислить модели которые обладают блоком,
-        | при этом у модели должен быть метод blocks().
+        | при этом у модели должен быть метод blockGroups().
         |
-        | public function blocks() {
-        |   return $this->morphMany('App\Block', 'blockable');
+        | public function blockGroups() {
+        |   return $this->morphMany('App\BlockGroup', 'blockGroupable');
         | }
         |
         */
+
     'models' => array(
-        'page' => 'App\Page',
+        'pages' => 'App\Page',
     ),
-    'templates' => array(
-        "accordion",
-        "about",
-    ),
+
+    'templates' => [
+        "site-blocks::site.block-groups.templates.accordion",
+        "site-blocks::site.block-groups.templates.about",
+    ],
+
     'fill' => array(
         [
             "title" => "Вопрос-Ответ",

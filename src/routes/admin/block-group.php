@@ -13,10 +13,12 @@ Route::group([
         "prefix" => "groups",
         "as" => "groups.",
     ],function (){
+        // groups for model
+        Route::get("/model/{model}/{model_id}", [BlockGroupController::class, "model"])->name("model");
+
         //blocks tree
         Route::get("/{group}/blocks-tree", [BlockController::class, "tree"])
             ->name("blocks-tree");
-
         Route::get("/", [BlockGroupController::class, "index"])->name("index");
         Route::get("/{group}", [BlockGroupController::class, "show"])->name("show");
     });

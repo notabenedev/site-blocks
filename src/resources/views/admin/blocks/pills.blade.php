@@ -11,12 +11,22 @@
                     </li>
                 @endcan
                 @can("create", \App\Block::class)
-                    <li class="nav-item">
-                        <a href="{{ route("admin.blocks.create") }}"
-                           class="nav-link{{ $currentRoute === "admin.blocks.create" ? " active" : "" }}">
-                            Добавить
-                        </a>
-                    </li>
+                    @php($group = ! empty($block->blockGroup) ? $block->blockGroup : "")
+                        @if(!empty($group) && ! empty($modelName = \App\BlockGroup::getBlockGroupModelName($group->block_groupable_type)))
+                            <li class="nav-item">
+                                <a class="nav-link{{ $currentRoute === "admin.blocks.createToGroup" ? " active" : "" }}"
+                                   href="{{ route('admin.blocks.createToGroup', ["group" => (isset($group) ? $group: "")]) }}">
+                                    Добавить блок к группе
+                                </a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link{{ $currentRoute === "admin.blocks.create" ? " active" : "" }}"
+                                   href="{{ route('admin.blocks.create') }}">
+                                    Добавить блок
+                                </a>
+                            </li>
+                        @endif
                 @endcan
                 @if (! empty($block))
                     @can("view", \App\Block::class)

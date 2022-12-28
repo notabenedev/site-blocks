@@ -34,6 +34,7 @@ class SiteBlocksServiceProvider extends ServiceProvider
         if (config("site-blocks.blocksAdminRoutes")) {
             $this->loadRoutesFrom(__DIR__."/routes/admin/block-group.php");
             $this->loadRoutesFrom(__DIR__."/routes/admin/block.php");
+            $this->loadRoutesFrom(__DIR__."/routes/admin/ajax.php");
         }
 
         // Подключение шаблонов.
@@ -48,6 +49,11 @@ class SiteBlocksServiceProvider extends ServiceProvider
         // Подписаться на обновление изображений.
         $this->app['events']->listen(ImageUpdate::class, ClearCacheOnUpdateImage::class);
         $this->app['events']->listen(PriorityUpdate::class, BlockGroupsPriorityClearCache::class);
+
+        // Assets.
+        $this->publishes([
+            __DIR__ . '/resources/js/components' => resource_path('js/components/vendor/site-blocks'),
+        ], 'public');
     }
 
     /**

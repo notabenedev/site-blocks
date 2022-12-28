@@ -92,9 +92,14 @@
                     </div>
 
                     <div class="form-group mt-3">
-                        @isset($groups)
-                            <label>Группы блоков:</label>
-                            @include("site-blocks::admin.block-groups.includes.tree-radio", ['groups' => $groups])
+                        @isset($group)
+                            <label>Группа блоков:</label>
+                            @include("site-blocks::admin.block-groups.includes.tree-radio", ['groups' => [$group]])
+                        @else
+                            @isset($groups)
+                                <label>Группы блоков:</label>
+                                @include("site-blocks::admin.block-groups.includes.tree-radio", ['groups' => $groups])
+                            @endisset
                         @endisset
                     </div>
 

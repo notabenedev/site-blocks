@@ -15,7 +15,9 @@ class BlockGroup extends Model
     protected $fillable = [
         "title",
         "slug",
-        "template"
+        "template",
+        "block_groupable_type",
+        "block_groupable_id",
     ];
 
     protected $imageKey = "main_image";
@@ -34,7 +36,10 @@ class BlockGroup extends Model
         });
 
         static::deleting(function (\App\BlockGroup $model) {
-            $model->blockable()->sync([]);
+            $model->blockGroupable()->sync([]);
+            foreach ($model->blocks as $block){
+                $block->delete();
+            }
             // Забыть кэш.
             $model->forgetCache();
         });
@@ -44,7 +49,7 @@ class BlockGroup extends Model
      * Группа блоков может относится к любому материалу.
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function blockable() {
+    public function blockGroupable() {
         return $this->morphTo();
     }
 
@@ -138,6 +143,27 @@ class BlockGroup extends Model
     }
 
     /**
+     * Найти имя модели по классу в конфиге.
+     *
+     * @param $model
+     * @return bool
+     */
+    public static function getBlockGroupModelName($model)
+    {
+        $modelName = false;
+        foreach (config('site-blocks.models') as $name => $class) {
+            if (
+                $class == $model &&
+                class_exists($class)
+            ) {
+                $modelName = $name;
+                break;
+            }
+        }
+        return $modelName;
+    }
+
+    /**
      * Get no models groups
      *
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
@@ -145,9 +171,47 @@ class BlockGroup extends Model
     public static function getFree(){
         $query = self::query();
         return $query
-            ->whereNull("blockable_type")
-            ->whereNull("blockable_id")
+            ->whereNull("block_groupable_type")
+            ->whereNull("block_groupable_id")
             ->orderBy("title")
             ->get();
+    }
+
+    /**
+     * Prepare for vue
+     *
+     * @param $model
+     * @param $id
+     * @return array
+     */
+    public static function prepareForModel($model, $id){
+        $object = self::getBlockGroupModel($model, $id);
+        if (! empty($object)) {
+            $collection = $object->blockGroups()->orderBy("priority")->get();
+        }
+        $blockGroups = [];
+        foreach ($collection as $item) {
+            $blockGroups[] = [
+                "title" => $item->title,
+                "slug" => $item->slug,
+                "template" => $item->template,
+                "priority" => $item->priority,
+                "id" => $item->id,
+                "showBlocksUrl" => route("admin.blocks.groups.show", ["group" => $item]),
+                'titleChanged' => $item->title,
+                'titleInput' => false,
+                "titleUrl" => route("admin.vue.blocks.groups.title", [
+                    "model" => $model,
+                    'id' => $id,
+                    'group' => $item->id,
+                ]),
+                'delete' => route('admin.vue.blocks.groups.delete', [
+                    "model" => $model,
+                    'id' => $id,
+                    'group' => $item->id,
+                ]),
+            ];
+        }
+        return $blockGroups;
     }
 }

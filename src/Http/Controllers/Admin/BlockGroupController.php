@@ -4,7 +4,9 @@ namespace Notabenedev\SiteBlocks\Http\Controllers\Admin;
 
 use App\BlockGroup;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class BlockGroupController extends Controller
@@ -27,7 +29,6 @@ class BlockGroupController extends Controller
      */
     public function index(Request $request)
     {
-        $view = $request->get("view","default");
         $query = $request->query;
         $pager = config("site-blocks.adminPager", 20);
 
@@ -64,4 +65,208 @@ class BlockGroupController extends Controller
         ] );
     }
 
+    /**
+     * groups for model
+     *
+     * @param $model
+     * @param $model_id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function model($model, $model_id)
+    {
+        $object = BlockGroup::getBlockGroupModel($model, $model_id);
+        $groups = $object->blockGroups()->get();
+        return view("site-blocks::admin.block-groups.model", compact("groups", "object", "model"));
+    }
+
+    /**
+     * Get groups to component
+     *
+     * @param $model
+     * @param $id
+     * @return array
+     *
+     */
+    public function get($model, $id)
+    {
+        $blockGroups = BlockGroup::prepareForModel($model, $id);
+
+        if ($blockGroups) {
+            return [
+                'success' => TRUE,
+                'blockGroups' => $blockGroups,
+            ];
+        }
+        else {
+            return [
+                'success' => FALSE,
+                'message' => 'Model not found',
+            ];
+        }
+    }
+
+
+    /**
+     * Изменить имя.
+     *
+     * @param Request $request
+     * @param $model
+     * @param $id
+     * @param $group
+     * @return array
+     */
+    public function title(Request $request, $model, $id, $group)
+    {
+        if (! $request->has("changed")) {
+            return [
+                'success' => FALSE,
+                'message' => "Вес не найден",
+            ];
+        }
+        if (! BlockGroup::getBlockGroupModel($model, $id)) {
+            return [
+                'success' => FALSE,
+                'message' => 'Model not found',
+            ];
+        }
+        try {
+            $groupObject = BlockGroup::query()
+                ->where("id", $group)
+                ->firstOrFail();
+        } catch (\Exception $e) {
+            return [
+                'success' => FALSE,
+                'message' => 'Group not found',
+            ];
+        }
+        $groupObject->title = $request->get('changed');
+        $groupObject->save();
+        return [
+            'success' => TRUE,
+            'blockGroups' => BlockGroup::prepareForModel($model, $id),
+        ];
+    }
+
+    /**
+     * Пробуем сохранить.
+     *
+     * @param Request $request
+     * @param $model
+     * @param $id
+     * @return array
+     */
+    public function post(Request $request, $model, $id) {
+        $modelClass = BlockGroup::getBlockGroupModel($model, $id);
+        if (! $modelClass) {
+            return [
+                'success' => FALSE,
+                'message' => 'Model not found',
+            ];
+        }
+
+        if (! $request->has('template')) {
+            return [
+                'success' => FALSE,
+                'message' => 'Template not found',
+            ];
+        }
+
+        $template = $request->get("template");
+
+        if (empty($template) || $template == 'undefined'){
+            return [
+                'success' => FALSE,
+                'message' => 'Template is not set',
+            ];
+        }
+
+        $title = $request->get("title");
+
+        if (empty($title) || $title == 'undefined'){
+            $title = "$modelClass->title: $model".substr($template,strripos($template,"."));
+        }
+
+        $blockGroup = BlockGroup::create([
+            'title' => $title,
+            'template' => $template,
+        ]);
+        $modelClass->blockGroups()->save($blockGroup);
+
+        //event(new BlockGroupUpdate($blockGroup, "created"));
+        return [
+            'success' => TRUE,
+            'blockGroups' => BlockGroup::prepareForModel($model, $id),
+        ];
+    }
+
+    /**
+     * Пробуем удалить.
+     *
+     * @param $model
+     * @param $id
+     * @param $group
+     * @return array
+     */
+    public function delete($model, $id, $group) {
+        if ( BlockGroup::getBlockGroupModel($model, $id)) {
+            try {
+                $groupObject = BlockGroup::findOrFail($group);
+            } catch (\Exception $e) {
+                return [
+                    'success' => FALSE,
+                    'message' => 'Group not found',
+                ];
+            }
+            $groupObject->delete();
+            return [
+                'success' => TRUE,
+                'blockGroups' => BlockGroup::prepareForModel($model, $id),
+            ];
+        }
+        else {
+            return [
+                'success' => FALSE,
+                'message' => 'Model not found',
+            ];
+        }
+    }
+
+    /**
+     * Порядок групп.
+     *
+     * @param Request $request
+     * @param $model
+     * @param $id
+     * @return array
+     */
+    public function updateOrder(Request $request, $model, $id)
+    {
+        Validator::make($request->all(), [
+            'blockGroups' => ['required', 'array'],
+        ])->validate();
+
+        $modelClass = BlockGroup::getBlockGroupModel($model, $id);
+        if (! $modelClass) {
+            return [
+                'success' => FALSE,
+                'message' => 'Model not found',
+            ];
+        }
+
+        $ids = $request->get("blockGroups");
+        foreach ($ids as $priority => $idBlock) {
+            try {
+                $blockGroup = BlockGroup::find($idBlock);
+                $blockGroup->priority = $priority;
+                $blockGroup->save();
+            }
+            catch (\Exception $exception) {
+                continue;
+            }
+        }
+        return [
+            'success' => TRUE,
+            'blockGroups' => BlockGroup::prepareForModel($model, $id),
+        ];
+    }
 }

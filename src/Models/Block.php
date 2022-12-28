@@ -69,8 +69,6 @@ class Block extends Model
      */
     public function getTeaser($template, $first)
     {
-        //Cache::forget("block-teaser:{$this->id}-teaser-accordion}");
-        //Cache::forget("block-teaser:{$this->id}-teaser-about}");
         $key = "block-teaser:{$this->id}-{teaser-$template}";
         $model = $this;
         $block = Cache::rememberForever($key, function () use ($model) {
@@ -116,5 +114,4 @@ class Block extends Model
         $this->forgetCache();
         $this->blockGroup->forgetCache();
     }
-
 }

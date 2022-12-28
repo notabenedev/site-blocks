@@ -5,7 +5,7 @@
 @section('header-title', "{$group->title} - Группы блоков")
 
 @section('admin')
-    @include("site-blocks::admin.block-groups.includes.pills")
+    @include("site-blocks::admin.block-groups.includes.pills", ["group" => $group])
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -14,6 +14,16 @@
                     <dd class="col-sm-9">{{ $group->title }}</dd>
                     <dt class="col-sm-3">Адрес</dt>
                     <dd class="col-sm-9">{{ $group->slug }}</dd>
+                    <dt class="col-sm-3">Шаблон</dt>
+                    <dd class="col-sm-9">{{ $group->template }}</dd>
+                    @if(! empty($modelName = \App\BlockGroup::getBlockGroupModelName($group->block_groupable_type)))
+                        <dt class="col-sm-3">Объект:</dt>
+                        <dd class="col-sm-9">
+                            <a href="{{ route("admin.$modelName.show", ["page" => $group->blockGroupable]) }}">
+                                {{ $group->blockGroupable->title }}
+                            </a>
+                        </dd>
+                    @endif
                 </dl>
             </div>
         </div>

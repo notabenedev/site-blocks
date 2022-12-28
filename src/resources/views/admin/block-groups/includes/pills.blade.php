@@ -16,12 +16,21 @@
 
                 @if(! empty($group))
                     @can("create", \App\StaffDepartment::class)
+                            @if(! empty($modelName = \App\BlockGroup::getBlockGroupModelName($group->block_groupable_type)))
                             <li class="nav-item">
                                 <a class="nav-link"
-                                   href="{{ route('admin.blocks.create') }}">
-                                    Добавить блок
+                                   href="{{ route('admin.blocks.createToGroup', ["group" => (isset($group) ? $group: "")]) }}">
+                                    Добавить блок к группе
                                 </a>
                             </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="{{ route('admin.blocks.create') }}">
+                                        Добавить блок
+                                    </a>
+                                </li>
+                            @endif
                     @endcan
 
                     @can("view", $group)

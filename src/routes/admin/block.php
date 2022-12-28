@@ -14,6 +14,7 @@ Route::group([
     ],function (){
         Route::get("/", [BlockController::class, "index"])->name("index");
         Route::get("/create", [BlockController::class, "create"])->name("create");
+        Route::get("/create-to/{group}", [BlockController::class, "createToGroup"])->name("createToGroup");
         Route::post("", [BlockController::class, "store"])->name("store");
         Route::get("/{block}", [BlockController::class, "show"])->name("show");
         Route::get("/{block}/edit", [BlockController::class, "edit"])->name("edit");

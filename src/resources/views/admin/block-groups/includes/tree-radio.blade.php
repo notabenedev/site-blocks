@@ -4,7 +4,10 @@
             <div class="custom-control custom-radio">
                 <input class="custom-control-input"
                        type="radio"
-                       {{ (! count($errors->all()) ) && (isset($block) && isset($block->blockGroup) && $block->blockGroup->id == $group->id) || old('check-' . $group->id) ? "checked" : "" }}
+                       {{ (! count($errors->all()) ) && (isset($block) && isset($block->blockGroup) && $block->blockGroup->id == $group->id)
+                        || old('check-' . $group->id)
+                        || count($groups) == 1
+                        || $loop->first ? "checked" : "" }}
                        value="{{ $group->id }}"
                        id="check-{{ $group->id }}"
                        name="check-group">

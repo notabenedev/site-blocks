@@ -22,6 +22,7 @@ class BlocksMakeCommand extends BaseConfigModelCommand
                     {--policies : Export and create rules} 
                     {--only-default : Create only default rules}
                     {--controllers : Export controllers}
+                    {--vue : Export vue}
                     {--menu : Make admin menu}
                     ';
 
@@ -79,6 +80,25 @@ class BlocksMakeCommand extends BaseConfigModelCommand
     ];
 
     /**
+     * Vue files folder
+     *
+     * @var string
+     */
+    protected $vueFolder = "site-blocks";
+
+    /**
+     * Vue files list
+     *
+     * @var array
+     */
+    protected $vueIncludes = [
+        'admin' => [
+            'block-group-component' => "BlockGroupComponent",
+        ],
+        'app' => [],
+    ];
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -107,6 +127,10 @@ class BlocksMakeCommand extends BaseConfigModelCommand
 
         if ($this->option("controllers") || $all) {
             $this->exportControllers("Admin");
+        }
+
+        if ($this->option("vue") || $all) {
+            $this->makeVueIncludes("admin");
         }
 
         if ($this->option("menu") || $all) {

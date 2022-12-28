@@ -54,6 +54,16 @@ class BlockController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function createToGroup(BlockGroup $group)
+    {
+        return view("site-blocks::admin.blocks.create", ["group" => $group] );
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
@@ -125,10 +135,18 @@ class BlockController extends Controller
      */
     public function edit(Block $block)
     {
+        $group = null;
+        if (! empty($block->blockGroup)){
+            $group = $block->blockGroup;
+            if (empty($group->blockGroupable))
+                $group = null;
+        }
         return view("site-blocks::admin.blocks.edit", [
             'block' => $block,
+            'group' => $group,
         ]);
     }
+
 
     /**
      * Update the specified resource in storage.
