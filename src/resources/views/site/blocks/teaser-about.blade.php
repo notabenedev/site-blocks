@@ -5,17 +5,17 @@
         </h3>
     </div>
     <div class="card-body blocks-about__card-body">
-        <div class="float-md-left">
+        <div class="{{ config("site-blocks.floatImgAboutTemplate", "float-md-left") }}">
             @if ($block->image)
                     @img([
                     "image" => $block->image,
                     "template" => "sm-grid-12",
                     "lightbox" => "blockGroup" . $block->slug,
-                    "imgClass" => "img-fluid rounded mb-3 mr-md-3 blocks-about__img",
-                    "grid" => [
-                    "lg-grid-4" => 992,
-                    "md-grid-6" => 768
-                    ],
+                    "imgClass" => "img-fluid blocks-about__img",
+                    "grid" => config("site-blocks.filters", [
+                            "lg-grid-6" => 992,
+                            "md-grid-6" => 768
+                        ]) ,
                     ])
             @endif
          </div>

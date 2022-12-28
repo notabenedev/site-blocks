@@ -23,6 +23,7 @@ class BlocksMakeCommand extends BaseConfigModelCommand
                     {--only-default : Create only default rules}
                     {--controllers : Export controllers}
                     {--vue : Export vue}
+                    {--scss : Export scss}
                     {--menu : Make admin menu}
                     ';
 
@@ -99,6 +100,17 @@ class BlocksMakeCommand extends BaseConfigModelCommand
     ];
 
     /**
+     * Стили.
+     *
+     * @var array
+     */
+    protected $scssIncludes = [
+        "app" => [
+            "site-blocks/blocks",
+        ],
+    ];
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -131,6 +143,10 @@ class BlocksMakeCommand extends BaseConfigModelCommand
 
         if ($this->option("vue") || $all) {
             $this->makeVueIncludes("admin");
+        }
+
+        if ($this->option("scss") || $all) {
+            $this->makeScssIncludes("app");
         }
 
         if ($this->option("menu") || $all) {

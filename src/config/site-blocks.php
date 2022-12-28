@@ -27,15 +27,23 @@ return [
         [
             "title" => "Вопрос-Ответ",
             "slug" => "faq",
-            "template" => "site-blocks::site.block-groups.templates.accordion",
+            "template" => "site-blocks::site.block-groups.templates.home-accordion",
         ],
         [
             "title" => "О компании",
             "slug" => "about-company",
-            "template" => "site-blocks::site.block-groups.templates.about",
+            "template" => "site-blocks::site.block-groups.templates.home-about",
         ],
     ),
     "sitePackageName" => "Блоки",
     "blocksAdminRoutes" => true,
     "adminPager" => 20,
+
+    'filters' => array(
+        "lg-grid-4" => 992,
+        "md-grid-6" => 768
+    ),
+
+    "floatImgAboutTemplate" => "float-md-left float-lg-none float-xl-left",
+    "floatImgAccordionTemplate" => "float-md-right float-lg-none float-xl-right",
 ];

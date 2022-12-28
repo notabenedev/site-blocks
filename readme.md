@@ -10,6 +10,7 @@
                             {--policies : Export models}
                             {--controllers : Export controllers}
                             {--vue : Export components}
+                            {--scss : Export styles}
                             {--menu : Make admin menu}
                             {--fill : create default groups from config fill array}
     npm run dev

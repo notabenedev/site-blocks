@@ -1,0 +1,66 @@
+.blocks{
+  &-about{
+    margin-bottom: 1rem;
+
+    &__img{
+      border-radius: $border-radius;
+      margin-bottom: 1rem;
+      @include media-breakpoint-only(md){
+        margin-right: 1rem;
+      }
+      @include media-breakpoint-up(xl){
+        margin-right: 1rem;
+      }
+    }
+
+    &__card{
+
+      &-header{
+
+      }
+
+      &-h2{
+
+      }
+
+      &-body{
+
+      }
+    }
+  }
+
+  &-accrordion{
+    margin-bottom: 1rem;
+
+    &__img{
+      border-radius: $border-radius;
+      margin-bottom: 1rem;
+      @include media-breakpoint-only(md){
+        margin-left: 1rem;
+      }
+      @include media-breakpoint-up(xl){
+        margin-left: 1rem;
+      }
+    }
+
+    &__collapse{
+
+    }
+
+
+    &__card{
+
+      &-header{
+
+      }
+
+      &-body{
+
+      }
+
+      &-h2{
+
+      }
+    }
+  }
+}
