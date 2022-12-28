@@ -6,7 +6,9 @@ return [
         |-------------------------------------
         |
         | Можно перечислить модели которые обладают блоком,
-        | при этом у модели должен быть метод blockGroups().
+        | при этом у модели должен быть метод blockGroups():
+        |
+        | добавьте трейт use BlockGroups к модели.
         |
         | public function blockGroups() {
         |   return $this->morphMany('App\BlockGroup', 'blockGroupable');

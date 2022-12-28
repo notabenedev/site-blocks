@@ -14,3 +14,7 @@
                             {--menu : Make admin menu}
                             {--fill : create default groups from config fill array}
     npm run dev
+    Add to morphed Model: 
+                            use ShouldBlockGroup;
+    Add to config:
+                            
