@@ -5,6 +5,7 @@ namespace Notabenedev\SiteBlocks\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Notabenedev\SiteBlocks\Events\BlockGroupUpdate;
 use PortedCheese\BaseSettings\Traits\ShouldSlug;
 
 class BlockGroup extends Model
@@ -33,6 +34,7 @@ class BlockGroup extends Model
         static::updating(function (\App\BlockGroup $model) {
             // Забыть кэш.
             $model->forgetCache();
+            event(new BlockGroupUpdate($model, "updated"));
         });
 
         static::deleting(function (\App\BlockGroup $model) {
@@ -42,6 +44,7 @@ class BlockGroup extends Model
             }
             // Забыть кэш.
             $model->forgetCache();
+            event(new BlockGroupUpdate($model, "deleting"));
         });
     }
 
