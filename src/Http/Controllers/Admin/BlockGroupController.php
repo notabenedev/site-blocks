@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Notabenedev\SiteBlocks\Events\BlockGroupUpdate;
 
 class BlockGroupController extends Controller
 {
@@ -192,7 +193,7 @@ class BlockGroupController extends Controller
         ]);
         $modelClass->blockGroups()->save($blockGroup);
 
-        //event(new BlockGroupUpdate($blockGroup, "created"));
+        event(new BlockGroupUpdate($blockGroup, "created"));
         return [
             'success' => TRUE,
             'blockGroups' => BlockGroup::prepareForModel($model, $id),
