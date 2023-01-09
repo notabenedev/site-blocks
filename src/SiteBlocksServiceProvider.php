@@ -103,6 +103,17 @@ class SiteBlocksServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/config/site-blocks.php','site-blocks'
         );
+        $this->initFacades();
     }
 
+    /**
+     * Подключение Facade.
+     */
+    protected function initFacades()
+    {
+        $this->app->singleton("block-group-actions", function () {
+            $class = config("site-blocks.blockGroupFacade");
+            return new $class;
+        });
+    }
 }

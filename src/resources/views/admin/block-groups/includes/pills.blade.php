@@ -1,5 +1,5 @@
 @if (! empty($group))
-{{--    @include("site-blocks::admin.block-groups.includes.breadcrumb")--}}
+    @include("site-blocks::admin.block-groups.includes.breadcrumb")
 @endif
 <div class="col-12 mb-2">
     <div class="card">
@@ -8,7 +8,7 @@
                 @can("viewAny", \App\BlockGroup::class)
                     <li class="nav-item">
                         <a href="{{ route("admin.blocks.groups.index") }}"
-                           class="nav-link{{ isset($isTree) && !$isTree ? " active" : "" }}">
+                           class="nav-link{{ isset($isTree) && !$isTree ? " active" : $currentRoute === "admin.blocks.groups.index" ? " active" : ""  }}">
                             Группы блоков
                         </a>
                     </li>
@@ -18,16 +18,16 @@
                     @can("create", \App\StaffDepartment::class)
                             @if(! empty($modelName = \App\BlockGroup::getBlockGroupModelName($group->block_groupable_type)))
                             <li class="nav-item">
-                                <a class="nav-link"
+                                <a class="nav-link{{ $currentRoute === "admin.blocks.createToGroup" ? " active" : ""}}"
                                    href="{{ route('admin.blocks.createToGroup', ["group" => (isset($group) ? $group: "")]) }}">
                                     Добавить блок к группе
                                 </a>
                             </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="nav-link"
+                                    <a class="nav-link{{ $currentRoute === "admin.blocks.create" ? " active" : "" }}"
                                        href="{{ route('admin.blocks.create') }}">
-                                        Добавить блок
+                                        Добавить home-блок
                                     </a>
                                 </li>
                             @endif

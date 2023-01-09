@@ -48,4 +48,7 @@ return [
 
     "floatImgAboutTemplate" => "float-md-left float-lg-none float-xl-left",
     "floatImgAccordionTemplate" => "float-md-right float-lg-none float-xl-right",
+
+    "blockGroupFacade" => \Notabenedev\SiteBlocks\Helpers\BlockGroupActionsManager::class,
+
 ];

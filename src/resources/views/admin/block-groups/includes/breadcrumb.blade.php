@@ -2,7 +2,7 @@
 <div class="col-12 mb-3">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            @foreach(\Notabenedev\SiteStaff\Facades\BlockGroupActions::getAdminBreadcrumb($group, $blockPage) as $item)
+            @foreach(\Notabenedev\SiteBlocks\Facades\BlockGroupActions::getAdminBreadcrumb($group, $blockPage) as $item)
                 <li class="breadcrumb-item{{ $item->active ? " active" : "" }}" aria-current="page">
                     @if ($item->active)
                         {{ $item->title }}

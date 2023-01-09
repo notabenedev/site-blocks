@@ -4,7 +4,7 @@
 @section('header-title',  'Блок - Добавить')
 
 @section('admin')
-    @include("site-blocks::admin.blocks.pills")
+    @include("site-blocks::admin.blocks.pills", ["group" => isset($group)? $group : ""])
     <div class="col-12">
         <div class="card">
             <div class="card-body">

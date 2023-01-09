@@ -1,3 +1,7 @@
+@if (! empty($group = ! empty($block->blockGroup) ? $block->blockGroup : isset($group)? $group : false))
+    @include("site-blocks::admin.block-groups.includes.pills")
+@endif
+
 <div class="col-12 mb-2">
     <div class="card">
         <div class="card-body">
@@ -6,7 +10,7 @@
                     <li class="nav-item">
                         <a href="{{ route("admin.blocks.index") }}"
                            class="nav-link{{ $currentRoute === "admin.blocks.index" ? " active" : "" }}">
-                            Список
+                            Список всех блоков
                         </a>
                     </li>
                 @endcan
@@ -23,7 +27,7 @@
                             <li class="nav-item">
                                 <a class="nav-link{{ $currentRoute === "admin.blocks.create" ? " active" : "" }}"
                                    href="{{ route('admin.blocks.create') }}">
-                                    Добавить блок
+                                    Добавить home-блок
                                 </a>
                             </li>
                         @endif

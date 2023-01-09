@@ -4,7 +4,7 @@
 @section('header-title', "Редактировать {$block->title}")
 
 @section('admin')
-    @include("site-blocks::admin.blocks.pills")
+    @include("site-blocks::admin.blocks.pills", ["group" => $block->blockGroup])
     <div class="col-12">
         <div class="card">
             <div class="card-body">
