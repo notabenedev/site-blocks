@@ -63,4 +63,38 @@
       }
     }
   }
+
+  &-step{
+    &__img{
+      border-radius: $border-radius;
+    }
+    &__col{
+      margin-bottom: $grid-gutter-width * 0.5;
+    }
+    &__card{
+      border: 0;
+      transition: $transition-fade;
+      height: 100%;
+      background-color: unset;
+      &:hover{
+        box-shadow: $box-shadow;
+        transition: $transition-fade;
+      }
+      &-number{
+        font-size: xxx-large;
+        font-weight: bold;
+        margin-right: $grid-gutter-width * 0.5;
+        color: $primary;
+      }
+      &-content{
+        margin: auto 0;
+      }
+      &-title{
+
+      }
+      &-desc{
+
+      }
+    }
+  }
 }

@@ -5,6 +5,7 @@ namespace Notabenedev\SiteBlocks\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Notabenedev\SiteBlocks\Events\BlockGroupUpdate;
 use PortedCheese\BaseSettings\Traits\ShouldImage;
 use PortedCheese\BaseSettings\Traits\ShouldSlug;
 
@@ -26,9 +27,13 @@ class Block extends Model
 
         parent::booting();
 
-        static::updated(function (\App\Block $model) {
+        static::updating(function (\App\Block $model) {
             // Забыть кэш.
             $model->forgetCache();
+            if (! empty($model->blockGroup)){
+                $model->blockGroup->forgetCache();
+                event(new BlockGroupUpdate($model->blockGroup, "updating"));
+            }
         });
 
         static::deleting(function (\App\Block $model) {
@@ -89,7 +94,7 @@ class Block extends Model
      */
     public function forgetCache()
     {
-        $templates = ["accordion", "about"];
+        $templates = ["accordion", "about", "step"];
         foreach ($templates as $template) {
             Cache::forget("block-teaser:{$this->id}-{teaser-$template}");
         }

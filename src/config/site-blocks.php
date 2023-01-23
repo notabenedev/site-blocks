@@ -23,6 +23,7 @@ return [
     'templates' => [
         "site-blocks::site.block-groups.templates.accordion",
         "site-blocks::site.block-groups.templates.about",
+        "site-blocks::site.block-groups.templates.step",
     ],
 
     'fill' => array(
@@ -36,6 +37,11 @@ return [
             "slug" => "about-company",
             "template" => "site-blocks::site.block-groups.templates.home-about",
         ],
+        [
+            "title" => "Этапы",
+            "slug" => "steps",
+            "template" => "site-blocks::site.block-groups.templates.home-step",
+        ],
     ),
     "sitePackageName" => "Блоки",
     "blocksAdminRoutes" => true,
@@ -48,6 +54,7 @@ return [
 
     "floatImgAboutTemplate" => "float-md-left float-lg-none float-xl-left",
     "floatImgAccordionTemplate" => "float-md-right float-lg-none float-xl-right",
+    "floatImgStepTemplate" => "",
 
     "blockGroupFacade" => \Notabenedev\SiteBlocks\Helpers\BlockGroupActionsManager::class,
 
