@@ -19,6 +19,10 @@
     Add to morphed Model: 
                             use ShouldBlockGroup;
 ## Versions    
+
+    v0.1.6 - изменен шаблон accordion-teaser  & scss blocks-accordion 
+            php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
+
     v0.1.5 - шаблон steps
         - Config:
             php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
