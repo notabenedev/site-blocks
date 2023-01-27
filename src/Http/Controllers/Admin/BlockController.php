@@ -210,7 +210,7 @@ class BlockController extends Controller
     {
         $block->delete();
         return redirect()
-            ->route("admin.blocks.index")
+            ->back()
             ->with('success', 'Успешно удалено');
     }
 

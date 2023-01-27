@@ -20,6 +20,7 @@
                             use ShouldBlockGroup;
 ## Versions    
 
+    v0.1.7 - откорректирвоан редирект после удаления блока в админке (back())
     v0.1.6 - изменен шаблон accordion-teaser  & scss blocks-accordion 
             php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
 
