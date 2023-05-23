@@ -18,13 +18,15 @@ class BlocksMakeCommand extends BaseConfigModelCommand
     protected $signature = 'make:blocks
                     {--all : Run all}
                     {--models : Export models}
-                    {--fill : Fill groups}
+                    {--fill : Fill groups from config}
                     {--policies : Export and create rules} 
                     {--only-default : Create only default rules}
                     {--controllers : Export controllers}
                     {--vue : Export vue}
                     {--scss : Export scss}
                     {--menu : Make admin menu}
+                    {--remove-fill : remove groups from Fill array}
+               
                     ';
 
     /**
@@ -166,6 +168,30 @@ class BlocksMakeCommand extends BaseConfigModelCommand
                 catch (\Exception $e) {
                     BlockGroup::create($fill);
                     $this->info("Группа блоков ".$fill["title"]." создана");
+                }
+            }
+        }
+
+        if ($this->option("remove-fill")) {
+            foreach (config("site-blocks.fill", []) as $fill){
+                try {
+                    $group = BlockGroup::query()
+                        ->where("slug", $fill["slug"])
+                        ->where('title', $fill["title"])
+                        ->firstOrFail();
+
+                    if ($this->confirm("Группа блоков ".$fill["title"]."  exists. Do you want to remove it?")) {
+                        foreach ($group->blocks as $block){
+                            $block->delete();
+                        }
+                        $group->delete();
+                        $this->info("Группа блоков ".$fill["title"]." удалена");
+                        continue;
+                    }
+
+                }
+                catch (\Exception $e) {
+                    $this->info("Группа блоков ".$fill["title"]." отстутсвует");
                 }
             }
         }

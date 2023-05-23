@@ -14,13 +14,18 @@
                             {--vue : Export components}
                             {--scss : Export styles}
                             {--menu : Make admin menu}
-                            {--fill : create default groups from config fill array}
+                            {--fill : create default groups from config site-blocks.fill array (to home)}
+                            {--remove-fill : remove default  groups from config site-blocks.fill array (from home)}
     npm run dev
     Add to morphed Model: 
                             use ShouldBlockGroup;
 ## Versions    
 
-    v0.1.7 - откорректирвоан редирект после удаления блока в админке (back())
+    v1.0.9 - добавлен флаг --remove-fill к команде конфигурации пакета
+            Флаг позволяет удалить неиспользуемые дефолтные группы блоков, созданные ранее флагом --fill 
+            !ВАЖНО: после выполнения этой команды актуализируйте  конфиг site-blocks.fill (оставьте только используемые группы блоков)
+    v1.0.8 - откорректирвоан пункт меню Группы блоков для админ-интерфейса (проверка связки с другими моделями)
+    v1.0.7 - откорректирвоан редирект после удаления блока в админке (back())
     v0.1.6 - изменен шаблон accordion-teaser  & scss blocks-accordion 
             php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
 
