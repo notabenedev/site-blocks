@@ -1,4 +1,4 @@
-@if (! empty($group = ! empty($block->blockGroup) ? $block->blockGroup : isset($group)? $group : false))
+@if (! empty($group = ! empty($block->blockGroup) ? $block->blockGroup : (isset($group)? $group : false)))
     @include("site-blocks::admin.block-groups.includes.pills")
 @endif
 

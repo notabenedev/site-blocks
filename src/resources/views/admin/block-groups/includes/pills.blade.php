@@ -8,7 +8,8 @@
                 @can("viewAny", \App\BlockGroup::class)
                     <li class="nav-item">
                         <a href="{{ route("admin.blocks.groups.index") }}"
-                           class="nav-link{{ isset($isTree) && !$isTree ? " active" : $currentRoute === "admin.blocks.groups.index" ? " active" : ""  }}">
+                           class="nav-link
+                               {{ isset($isTree) && !$isTree ? " active" : ($currentRoute === "admin.blocks.groups.index" ? " active" : "")  }}">
                             Группы блоков
                         </a>
                     </li>
