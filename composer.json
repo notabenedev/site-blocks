@@ -2,9 +2,6 @@
     "name": "notabenedev/site-blocks",
     "description": "Add blocks to site",
     "type": "library",
-    "require": {
-        "portedcheese/base-settings": "@dev"
-    },
     "license": "MIT",
     "authors": [
         {
@@ -14,7 +11,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "portedcheese/base-settings": "^3.0",
+        "portedcheese/base-settings": "^3.0 | ^4.0",
         "portedcheese/admin-site-menu": "^1.6"
     },
     "autoload": {
