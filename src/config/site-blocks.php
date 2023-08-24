@@ -24,6 +24,7 @@ return [
         "site-blocks::site.block-groups.templates.accordion",
         "site-blocks::site.block-groups.templates.about",
         "site-blocks::site.block-groups.templates.step",
+        "site-blocks::site.block-groups.templates.vacancy",
     ],
 
     'fill' => array(
@@ -42,6 +43,11 @@ return [
             "slug" => "steps",
             "template" => "site-blocks::site.block-groups.templates.home-step",
         ],
+        [
+            "title" => "Вакансии",
+            "slug" => "steps",
+            "template" => "site-blocks::site.block-groups.templates.home-vacancy",
+        ],
     ),
     "sitePackageName" => "Блоки",
     "blocksAdminRoutes" => true,
@@ -54,6 +60,7 @@ return [
 
     "floatImgAboutTemplate" => "float-md-left float-lg-none float-xl-left",
     "floatImgAccordionTemplate" => "float-md-right float-lg-none float-xl-right",
+    "floatImgVacancyTemplate" => "float-md-right float-lg-none float-xl-right",
     "floatImgStepTemplate" => "",
 
     "blockGroupFacade" => \Notabenedev\SiteBlocks\Helpers\BlockGroupActionsManager::class,

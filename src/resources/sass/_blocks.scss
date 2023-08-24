@@ -64,6 +64,50 @@
     }
   }
 
+  &-vacancy{
+
+    &__img{
+      border-radius: $border-radius;
+      margin-bottom: 1rem;
+      @include media-breakpoint-only(md){
+        margin-left: 1rem;
+      }
+      @include media-breakpoint-up(xl){
+        margin-left: 1rem;
+      }
+    }
+
+    &__card{
+
+      &-header{
+        border: 0;
+      }
+
+      &-btn{
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      &-body{
+
+      }
+
+      &-footer{
+        background-color: transparent;
+        padding-bottom: 0;
+      }
+
+      &-h2{
+
+      }
+    }
+
+    &__short{
+      color: $primary;
+    }
+
+  }
+
   &-step{
     &__img{
       border-radius: $border-radius;

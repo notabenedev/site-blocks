@@ -21,6 +21,24 @@
                             use ShouldBlockGroup;
 ## Versions    
 
+    v1.0.11 - шаблон vacancy
+        - Config:
+            php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public
+        - Set up new config params to Config:
+         'fill' => 
+                [
+                    "title" => "Вакансии",
+                    "slug" => "vacancy",
+                    "template" => "site-blocks::site.block-groups.templates.home-vacancy",
+                ],
+        'templates' => [
+                "site-blocks::site.block-groups.templates.vacancy",
+                ],
+        "floatImgVacancyTemplate" => "float-md-right float-lg-none float-xl-right",
+
+        - php artisan make:blocks --fill
+        - php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
+    v1.0.10 - base 3 | 4, fix admin pills
     v1.0.9 - добавлен флаг --remove-fill к команде конфигурации пакета
             Флаг позволяет удалить неиспользуемые дефолтные группы блоков, созданные ранее флагом --fill 
             !ВАЖНО: после выполнения этой команды актуализируйте  конфиг site-blocks.fill (оставьте только используемые группы блоков)
