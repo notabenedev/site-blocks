@@ -45,7 +45,7 @@ return [
         ],
         [
             "title" => "Вакансии",
-            "slug" => "steps",
+            "slug" => "vacancy",
             "template" => "site-blocks::site.block-groups.templates.home-vacancy",
         ],
     ),
