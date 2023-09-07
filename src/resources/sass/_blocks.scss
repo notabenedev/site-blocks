@@ -141,4 +141,25 @@
       }
     }
   }
+
+  &-benefit{
+    &__ico{
+      border-radius: $border-radius;
+      margin-right: $grid-gutter-width * 0.5;
+      display: block;
+    }
+    &__container{
+      margin-bottom: $grid-gutter-width * 0.5;
+      height: 100%;
+    }
+    &__content{
+      margin: auto 0;
+    }
+    &__title{
+
+    }
+    &__desc{
+
+    }
+  }
 }

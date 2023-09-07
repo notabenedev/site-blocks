@@ -25,6 +25,7 @@ return [
         "site-blocks::site.block-groups.templates.about",
         "site-blocks::site.block-groups.templates.step",
         "site-blocks::site.block-groups.templates.vacancy",
+        "site-blocks::site.block-groups.templates.benefit",
     ],
 
     'fill' => array(
@@ -48,6 +49,11 @@ return [
             "slug" => "vacancy",
             "template" => "site-blocks::site.block-groups.templates.home-vacancy",
         ],
+        [
+            "title" => "Преимущества",
+            "slug" => "benefit",
+            "template" => "site-blocks::site.block-groups.templates.home-benefit",
+        ],
     ),
     "sitePackageName" => "Блоки",
     "blocksAdminRoutes" => true,
@@ -56,6 +62,9 @@ return [
     'filters' => array(
         "lg-grid-4" => 992,
         "md-grid-6" => 768
+    ),
+
+    'filtersBenefit' => array(
     ),
 
     "floatImgAboutTemplate" => "float-md-left float-lg-none float-xl-left",

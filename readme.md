@@ -21,9 +21,23 @@
                             use ShouldBlockGroup;
 ## Versions    
 
+    v1.0.12 - шаблон benefit
+        - Set up new config params to Config:
+        'fill' =>
+            [
+            "title" => "Преимущества",
+            "slug" => "benefit",
+            "template" => "site-blocks::site.block-groups.templates.home-benefit",
+            ],
+        'templates' => [
+            "site-blocks::site.block-groups.templates.benefit",
+            ],
+        'filtersBenefit' => array(),
+        - php artisan make:blocks --fill
+        - php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
     v1.0.11 - шаблон vacancy
         - Config:
-            php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public
+            php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=config
         - Set up new config params to Config:
          'fill' => 
                 [
