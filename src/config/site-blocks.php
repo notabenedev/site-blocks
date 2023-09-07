@@ -26,6 +26,7 @@ return [
         "site-blocks::site.block-groups.templates.step",
         "site-blocks::site.block-groups.templates.vacancy",
         "site-blocks::site.block-groups.templates.benefit",
+        "site-blocks::site.block-groups.templates.digit",
     ],
 
     'fill' => array(
@@ -54,6 +55,11 @@ return [
             "slug" => "benefit",
             "template" => "site-blocks::site.block-groups.templates.home-benefit",
         ],
+        [
+            "title" => "Цифры",
+            "slug" => "digit",
+            "template" => "site-blocks::site.block-groups.templates.home-digit",
+        ],
     ),
     "sitePackageName" => "Блоки",
     "blocksAdminRoutes" => true,
@@ -65,6 +71,8 @@ return [
     ),
 
     'filtersBenefit' => array(
+    ),
+    'filtersDigit' => array(
     ),
 
     "floatImgAboutTemplate" => "float-md-left float-lg-none float-xl-left",

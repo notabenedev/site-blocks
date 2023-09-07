@@ -162,4 +162,34 @@
 
     }
   }
+
+  &-digit{
+    &__ico{
+      border-radius: $border-radius;
+      margin-bottom: $grid-gutter-width * 0.5;
+      display: block;
+    }
+    &__container{
+      height: 100%;
+      text-align: center;
+      padding: 1rem;
+    }
+    &__top{
+      border-bottom: 3px solid $primary;
+    }
+    &__bottom{
+    }
+    &__title{
+      font-size: x-large;
+      margin-bottom: .75rem;
+    }
+    &__short{
+      font-size: xx-large;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    &__desc{
+
+    }
+  }
 }

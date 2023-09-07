@@ -21,6 +21,19 @@
                             use ShouldBlockGroup;
 ## Versions    
 
+    v1.0.13 - шаблон digit
+         - Set up new config params to Config:
+        'fill' =>
+            [
+            "title" => "Цифры",
+            "slug" => "digit",
+            "template" => "site-blocks::site.block-groups.templates.home-digit",
+            ],
+        'templates' => [
+            "site-blocks::site.block-groups.templates.digit",
+            ],
+        - php artisan make:blocks --fill 
+        - php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
     v1.0.12 - шаблон benefit
         - Set up new config params to Config:
         'fill' =>
