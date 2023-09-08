@@ -103,7 +103,7 @@ class BlockController extends Controller
     protected function storeValidator($data)
     {
         Validator::make($data, [
-            "title" => ["required", "min:2", "max:100", "unique:blocks,title"],
+            "title" => ["required", "min:2", "max:100"],
             "slug" => ["nullable", "min:2", "max:100", "unique:blocks,slug"],
             "image" => ["nullable", "image"],
         ], [], [
@@ -190,7 +190,7 @@ class BlockController extends Controller
     {
         $id = $block->id;
         Validator::make($data, [
-            "title" => ["required", "min:2", "max:100", "unique:blocks,title,{$id}"],
+            "title" => ["required", "min:2", "max:100"],
             "slug" => ["nullable", "min:2", "max:100", "unique:blocks,slug,{$id}"],
             "image" => ["nullable", "image"],
         ], [], [
