@@ -170,6 +170,20 @@ class BlocksMakeCommand extends BaseConfigModelCommand
                     $this->info("Группа блоков ".$fill["title"]." создана");
                 }
             }
+            foreach (config("site-blocks.fillGroups", []) as $fill){
+                try {
+                    $group = BlockGroup::query()
+                        ->where("slug", $fill["slug"])
+                        ->where('title', $fill["title"])
+                        ->firstOrFail();
+                    $group->update($fill);
+                    $this->info("Группа блоков ".$fill["title"]." обновлена");
+                }
+                catch (\Exception $e) {
+                    BlockGroup::create($fill);
+                    $this->info("Группа блоков ".$fill["title"]." создана");
+                }
+            }
         }
 
         if ($this->option("remove-fill")) {

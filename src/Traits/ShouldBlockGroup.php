@@ -24,6 +24,25 @@ trait ShouldBlockGroup
         return $this->morphMany(BlockGroup::class, 'block_groupable');
     }
 
+    /**
+     * Группы блоков Шаблона.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function blockGroupsByTemplate(string $template) {
+        return $this->morphMany(BlockGroup::class, 'block_groupable')
+            ->where("template","=", $template)->orderBy("priority");
+    }
+
+    /**
+     * Группы блоков Не из Шаблонов.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function blockGroupsNotInTemplates(array $templates) {
+        return $this->morphMany(BlockGroup::class, 'block_groupable')
+            ->whereNotIn("template", $templates)->orderBy("priority");
+    }
 
     /**
      * Удалить все группы.

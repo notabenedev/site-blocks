@@ -27,6 +27,7 @@ return [
         "site-blocks::site.block-groups.templates.vacancy",
         "site-blocks::site.block-groups.templates.benefit",
         "site-blocks::site.block-groups.templates.digit",
+        "site-blocks::site.block-groups.templates.tab",
     ],
 
     'fill' => array(
@@ -61,6 +62,20 @@ return [
             "template" => "site-blocks::site.block-groups.templates.home-digit",
         ],
     ),
+    'fillGroups' => array(
+       [
+           "title" => "Таб1",
+           "slug" => "tab-1",
+           "template" => "site-blocks::site.block-groups.templates.tab",
+           "groupTemplate" => "site-blocks::site.block-groups.templates.tab-pills",
+       ],
+        [
+           "title" => "Таб2",
+           "slug" => "tab-3",
+           "template" => "site-blocks::site.block-groups.templates.tab",
+           "groupTemplate" => "site-blocks::site.block-groups.templates.tab-pills",
+       ],
+    ),
     "sitePackageName" => "Блоки",
     "blocksAdminRoutes" => true,
     "adminPager" => 20,
@@ -73,6 +88,8 @@ return [
     'filtersBenefit' => array(
     ),
     'filtersDigit' => array(
+    ),
+    'filtersTab' => array(
     ),
 
     "floatImgAboutTemplate" => "float-md-left float-lg-none float-xl-left",

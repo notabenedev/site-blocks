@@ -96,6 +96,31 @@ class SiteBlocksServiceProvider extends ServiceProvider
 
             });
         }
+        // home groups fill
+        $tabBlocks = config("site-blocks.fillGroups", []);
+        foreach ( $tabBlocks as $default){
+            view()->composer([
+                $default["groupTemplate"],
+            ], function ($view){
+                foreach (config("site-blocks.fillGroups", []) as $default){
+                    if($default["groupTemplate"] == $view->name()) {
+                        $template = $default["template"];
+                        try{
+                            $groups = BlockGroup::query()
+                                ->whereNull("block_groupable_type")
+                                ->where("template","=", $template)
+                                ->orderBy("priority")
+                                ->get();
+                            $view->with("groups", $groups);
+                        }
+                        catch (\Exception $e){
+                        }
+                        break;
+                    }
+                }
+
+            });
+        }
     }
 
     public function register()

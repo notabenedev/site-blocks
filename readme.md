@@ -20,6 +20,37 @@
     Add to morphed Model: 
                             use ShouldBlockGroup;
 ## Versions    
+    v1.0.14 - шаблон tab для отображения нескольких Групп блоков в виде Табов
+          - Set up new config params :
+            'templates' => [
+                "site-blocks::site.block-groups.templates.tab",
+            ],
+          - (если нужно) задайте группы блоков для домашеней страницы  , например
+             'fillGroups' => array(
+                [
+                   "title" => "Таб1",
+                   "slug" => "tab-1",
+                   "template" => "site-blocks::site.block-groups.templates.tab",
+                   "groupTemplate" => "site-blocks::site.block-groups.templates.tab-pills",
+                ],
+                [
+                   "title" => "Таб2",
+                   "slug" => "tab-2",
+                   "template" => "site-blocks::site.block-groups.templates.tab",
+                   "groupTemplate" => "site-blocks::site.block-groups.templates.tab-pills",
+                ],
+            ),
+          - (если нужно) создайте заданные в конфиге блоки для домашней страницы:
+                php artisan make:blocks --fill   
+                (обновит старые и создаст новые блоки согласно Конфига fill, fillGroups)
+          - (если нужно) для вывода данных табов на домашней страцы подключите шаблон: 
+                @includeIf("site-blocks::site.block-groups.templates.tab-pills")  
+          - Важно! 
+            (Если переопределены шаблон вывода страницы site-pages или  Блоки подключены к другим моделям)
+            - При подключении табов к Модели разделите вывод групп блоков по заданному шаблону табов:
+                    $page->blockGroupsByTemplete("site-blocks::site.block-groups.templates.tab") 
+                    $page->blockGroupsNotInTempletes(["site-blocks::site.block-groups.templates.tab"]) 
+            Стандартный шаблон site-pages ^v3.1.0 содержит даннное разделение.
 
     v1.0.13 - шаблон digit
          - Set up new config params to Config:
