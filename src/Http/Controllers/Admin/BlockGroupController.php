@@ -35,11 +35,23 @@ class BlockGroupController extends Controller
 
         $collection = BlockGroup::query()
             ->orderBy("title","asc");
+
+        if ($title = $request->get("title", false)) {
+            $collection->where("title", "like", "%$title%");
+        }
+        if ($morph = $request->get("morph", "no")) {
+            if ($morph == "no") {
+                $collection->whereNull("block_groupable_type");
+            }
+            else {
+                $collection->whereNotNull("block_groupable_type");
+            }
+        }
         $groups = $collection->paginate($pager)->appends($request->input());
         $per = $pager;
         $page = $query->get('page', 1) - 1;
 
-        return view("site-blocks::admin.block-groups.index", compact("groups", "per","page"));
+        return view("site-blocks::admin.block-groups.index", compact("groups","request", "per","page"));
     }
 
     /**
