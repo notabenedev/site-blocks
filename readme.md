@@ -20,6 +20,13 @@
     Add to morphed Model: 
                             use ShouldBlockGroup;
 ## Versions    
+    v1.0.15 - обновления в админ панели групп и блоков:
+            - группы - поиск по заголовку, типу 
+            - блоки - поиск по группе
+            - редирект после удаления блока со страницы блока - на страницу группы
+          Проверить переопределение: 
+            - шаблонов: admin.block-groups.index, admin.blocks.pills, admin.blocks.index
+            - контроллеров:  Admin/BlockGroupController(index), Admin/BlocksController(destroy, index)
     v1.0.14 - шаблон tab для отображения нескольких Групп блоков в виде Табов
           - Set up new config params :
             'templates' => [
