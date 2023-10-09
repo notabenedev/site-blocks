@@ -63,6 +63,7 @@
                                           id="delete-form-block-{{ $block->id }}"
                                           class="btn-group"
                                           method="post">
+                                        <input name="redirect" value="group">
                                         @csrf
                                         @method("delete")
                                     </form>

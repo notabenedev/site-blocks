@@ -206,9 +206,16 @@ class BlockController extends Controller
      * @param Block $block
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Block $block)
+    public function destroy(Request $request, Block $block)
     {
+        $group = $block->blockGroup;
         $block->delete();
+
+        if($request->get("redirect") && $request->get("redirect") == "group")
+            return redirect()
+                ->route("admin.blocks.groups.show", ["group" => $group])
+                ->with('success', 'Успешно удалено');
+        else
         return redirect()
             ->back()
             ->with('success', 'Успешно удалено');
