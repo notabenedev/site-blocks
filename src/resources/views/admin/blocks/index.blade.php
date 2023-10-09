@@ -19,6 +19,17 @@
                            value="{{ $query->get('title') }}"
                            placeholder="Блоки">
 
+                    <select class="custom-select mb-2 mr-sm-2" name="group" aria-label="Группа ">
+                        <option value="all"{{ ! $query->has('group') || $query->get('group') === 'all' ? " selected" : '' }}>
+                            Все группы
+                        </option>
+                        @foreach($groups as $item)
+                            <option value="{{ $item->slug }}"{{ $query->get('group') === $item->slug ? " selected" : '' }}>
+                                {{ $item->title }}
+                            </option>
+                        @endforeach
+                    </select>
+
                     <button type="submit" class="btn btn-primary mb-2 mr-sm-1">Применить</button>
                     <a href="{{ route($currentRoute) }}" class="btn btn-secondary mb-2">Сбросить</a>
                 </form>

@@ -27,7 +27,22 @@ class BlockController extends Controller
     public function index(Request $request)
     {
         $query = $request->query;
+
+        $groups = BlockGroup::query()
+            ->orderBy("block_groupable_type")
+            ->orderBy("title","asc")
+            ->get()
+        ;
+
         $blocks = Block::query();
+
+        if ( $query->get("group")) {
+            $group = BlockGroup::query()
+                ->where("slug","=", $query->get("group"))
+                ->first();
+            if ($group)
+                $blocks = $group->blocks();
+        }
         $pager = config("site-blocks.adminPager", 20);
 
         if ($query->get('title')) {
@@ -38,6 +53,7 @@ class BlockController extends Controller
         return view("site-blocks::admin.blocks.index", [
             'blocksList' => $blocks->paginate($pager)->appends($request->input()),
             'query' => $query,
+            'groups' => $groups,
             'per' => $pager,
             'page' => $query->get('page', 1) - 1
         ]);
