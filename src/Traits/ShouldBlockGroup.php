@@ -30,7 +30,7 @@ trait ShouldBlockGroup
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function blockGroupsByTemplate(string $template) {
-        return $this->morphMany(BlockGroup::class, 'block_groupable')
+        return $this->blockGroups()
             ->where("template","=", $template)->orderBy("priority");
     }
 
@@ -40,7 +40,7 @@ trait ShouldBlockGroup
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function blockGroupsNotInTemplates(array $templates) {
-        return $this->morphMany(BlockGroup::class, 'block_groupable')
+        return $this->blockGroups()
             ->whereNotIn("template", $templates)->orderBy("priority");
     }
 

@@ -15,6 +15,6 @@
 </ul>
 <div class="tab-content" id="pills-tabContent">
     @foreach($tabs as $tab)
-        @includeIf($tab->template, ["group" => $tab, "blocks" => $tab->blocks, "first" => $loop->first ? 1: 0])
+        @includeIf($tab->template, ["group" => $tab, "blocks" => $tab->getBlocksCache(), "first" => $loop->first ? 1: 0])
     @endforeach
 </div>

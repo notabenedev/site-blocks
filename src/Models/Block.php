@@ -27,6 +27,14 @@ class Block extends Model
 
         parent::booting();
 
+        static::creating(function (\App\Block $model) {
+            // Забыть кэш.
+            if (! empty($model->blockGroup)){
+                $model->blockGroup->forgetCache();
+                event(new BlockGroupUpdate($model->blockGroup, "updating"));
+            }
+        });
+
         static::updating(function (\App\Block $model) {
             // Забыть кэш.
             $model->forgetCache();
