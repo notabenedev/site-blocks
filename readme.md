@@ -20,6 +20,9 @@
     Add to morphed Model: 
                             use ShouldBlockGroup;
 ## Versions    
+    v1.0.17 - обновления вывода табов:
+           Проверить переопределение:
+            - шаблона: site.block-groups.templates.tab-pills
     v1.0.16 - обновления в админ панели групп и блоков:
             - группы - поиск по заголовку, типу 
             - блоки - поиск по группе

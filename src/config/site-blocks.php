@@ -17,7 +17,7 @@ return [
         */
 
     'models' => array(
-        'pages' => 'App\Page',
+       // 'pages' => 'App\Page',
     ),
 
     'templates' => [

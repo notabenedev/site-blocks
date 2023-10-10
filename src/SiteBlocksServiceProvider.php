@@ -106,12 +106,12 @@ class SiteBlocksServiceProvider extends ServiceProvider
                     if($default["groupTemplate"] == $view->name()) {
                         $template = $default["template"];
                         try{
-                            $groups = BlockGroup::query()
+                            $tabs = BlockGroup::query()
                                 ->whereNull("block_groupable_type")
                                 ->where("template","=", $template)
                                 ->orderBy("priority")
                                 ->get();
-                            $view->with("groups", $groups);
+                            $view->with("tabs", $tabs);
                         }
                         catch (\Exception $e){
                         }
