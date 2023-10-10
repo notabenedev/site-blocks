@@ -20,6 +20,7 @@
     Add to morphed Model: 
                             use ShouldBlockGroup;
 ## Versions    
+    v1.1.0 - обновление Трейта > blockGroupsByTemplates(array), blockGroupsNotInTemplates(array)
     v1.0.17-v1.0.18 - обновления вывода табов:
             - Добавлен шаблон home-tab-pills (в тч в конфиг, для вывода табов на отдельной странице)
            Проверить переопределение:

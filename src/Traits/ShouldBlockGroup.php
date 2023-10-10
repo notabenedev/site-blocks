@@ -3,7 +3,6 @@
 namespace Notabenedev\SiteBlocks\Traits;
 
 use App\BlockGroup;
-use Illuminate\Http\Request;
 
 trait ShouldBlockGroup
 {
@@ -25,23 +24,23 @@ trait ShouldBlockGroup
     }
 
     /**
-     * Группы блоков Шаблона.
+     *  Группы блоков Шаблона.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @param array $templates
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function blockGroupsByTemplate(string $template) {
-        return $this->blockGroups()
-            ->where("template","=", $template)->orderBy("priority");
+    public function blockGroupsByTemplates(array $templates) {
+         return $this->blockGroups()->whereIn("template", $templates)->orderBy("priority")->get();
     }
 
     /**
      * Группы блоков Не из Шаблонов.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @param array $templates
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function blockGroupsNotInTemplates(array $templates) {
-        return $this->blockGroups()
-            ->whereNotIn("template", $templates)->orderBy("priority");
+        return $this->blockGroups()->whereNotIn("template", $templates)->orderBy("priority")->get();
     }
 
     /**
