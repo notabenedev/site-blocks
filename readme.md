@@ -20,6 +20,21 @@
     Add to morphed Model: 
                             use ShouldBlockGroup;
 ## Versions    
+    v1.1.1 - шаблон attention
+        - php artisan make:blocks --js
+        - php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
+        - Set up new config params (if you need):
+            'fill' =>
+                [
+                "title" => "Уведомление",
+                "slug" => "attention",
+                "template" => "site-blocks::site.block-groups.templates.home-attention",
+                ],
+            'templates' => [
+                "site-blocks::site.block-groups.templates.attention",
+                ],
+        - & after you've changed config - generate home-blocks (if you need):
+            php artisan make:blocks --fill 
     v1.1.0 - обновление Трейта > blockGroupsByTemplates(array), blockGroupsNotInTemplates(array)
     v1.0.17-v1.0.18 - обновления вывода табов:
             - Добавлен шаблон home-tab-pills (в тч в конфиг, для вывода табов на отдельной странице)

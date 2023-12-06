@@ -28,6 +28,7 @@ return [
         "site-blocks::site.block-groups.templates.benefit",
         "site-blocks::site.block-groups.templates.digit",
         "site-blocks::site.block-groups.templates.tab",
+        "site-blocks::site.block-groups.templates.alert",
     ],
 
     'fill' => array(
@@ -60,6 +61,11 @@ return [
             "title" => "Цифры",
             "slug" => "digit",
             "template" => "site-blocks::site.block-groups.templates.home-digit",
+        ],
+        [
+            "title" => "Уведомление",
+            "slug" => "attention",
+            "template" => "site-blocks::site.block-groups.templates.home-alert",
         ],
     ),
     'fillGroups' => array(

@@ -24,6 +24,7 @@ class BlocksMakeCommand extends BaseConfigModelCommand
                     {--controllers : Export controllers}
                     {--vue : Export vue}
                     {--scss : Export scss}
+                    {--js : Export scripts}
                     {--menu : Make admin menu}
                     {--remove-fill : remove groups from Fill array}
                
@@ -101,6 +102,12 @@ class BlocksMakeCommand extends BaseConfigModelCommand
         'app' => [],
     ];
 
+    protected $jsIncludes = [
+        "app" => [
+            "site-blocks/alert-cookie",
+        ]
+    ];
+
     /**
      * Стили.
      *
@@ -145,6 +152,10 @@ class BlocksMakeCommand extends BaseConfigModelCommand
 
         if ($this->option("vue") || $all) {
             $this->makeVueIncludes("admin");
+        }
+
+        if ($this->option("js") || $all) {
+            $this->makeJsIncludes("app");
         }
 
         if ($this->option("scss") || $all) {

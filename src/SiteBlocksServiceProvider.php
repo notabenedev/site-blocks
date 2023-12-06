@@ -53,6 +53,7 @@ class SiteBlocksServiceProvider extends ServiceProvider
         // Assets.
         $this->publishes([
             __DIR__ . '/resources/js/components' => resource_path('js/components/vendor/site-blocks'),
+            __DIR__ . '/resources/js/scripts' => resource_path('js/vendor/site-blocks'),
             __DIR__ . "/resources/sass" => resource_path("sass/vendor/site-blocks")
         ], 'public');
     }
