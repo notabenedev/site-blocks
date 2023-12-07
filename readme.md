@@ -12,6 +12,7 @@
                             {--policies : Export models}
                             {--controllers : Export controllers}
                             {--vue : Export components}
+                            {--js : Export js}
                             {--scss : Export styles}
                             {--menu : Make admin menu}
                             {--fill : create default groups from config site-blocks.fill array (to home)}
@@ -20,7 +21,7 @@
     Add to morphed Model: 
                             use ShouldBlockGroup;
 ## Versions    
-    v1.1.1 - шаблон attention
+    v1.1.1-v1.1.2 - шаблон attention
         - php artisan make:blocks --js
         - php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
         - Set up new config params (if you need):
