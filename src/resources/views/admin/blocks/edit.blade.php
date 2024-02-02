@@ -64,9 +64,13 @@
                     <div class="form-group">
                         @if($block->image)
                             <div class="d-inline-block">
-                                <img src="{{ route('imagecache', ['template' => 'small', 'filename' => $block->image->file_name]) }}"
-                                     class="rounded mb-2"
-                                     alt="{{ $block->image->name }}">
+                                @pic([
+                                "image" => $block->image,
+                                "template" => "small",
+                                "grid" => [
+                                ],
+                                "imgClass" => "rounded mb-2",
+                                ])
                                 <button type="button" class="close ml-1" data-confirm="{{ "delete-form-{$block->id}" }}">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
