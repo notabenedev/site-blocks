@@ -29,6 +29,7 @@ return [
         "site-blocks::site.block-groups.templates.digit",
         "site-blocks::site.block-groups.templates.tab",
         "site-blocks::site.block-groups.templates.alert",
+        "site-blocks::site.block-groups.templates.partner",
     ],
 
     'fill' => array(
@@ -67,6 +68,11 @@ return [
             "slug" => "attention",
             "template" => "site-blocks::site.block-groups.templates.home-alert",
         ],
+        [
+            "title" => "Партнеры",
+            "slug" => "partner",
+            "template" => "site-blocks::site.block-groups.templates.home-partner",
+        ],
     ),
     'fillGroups' => array(
        [
@@ -95,6 +101,7 @@ return [
     ),
     'filtersDigit' => array(
     ),
+    'filtersPartner' => array(    ),
     'filtersTab' => array(
     ),
 

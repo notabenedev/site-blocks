@@ -21,6 +21,21 @@
     Add to morphed Model: 
                             use ShouldBlockGroup;
 ## Versions    
+    v1.1.4 - шаблон partner
+        - для работы шаблона в проекте с base-settings v3 потребуется создать фильтр widen-logo и стиль d-hover (включены в base-settings ^v4.1.5)
+        - Set up new config params (if you need):
+            'fill' =>
+                [
+                "title" => "Партнер",
+                "slug" => "partner",
+                "template" => "site-blocks::site.block-groups.templates.home-partner",
+                ],
+            'templates' => [
+                "site-blocks::site.block-groups.templates.partner",
+                ],
+        - & after you've changed config - generate home-blocks (if you need):
+            php artisan make:blocks --fill 
+    v1.1.3 - fix admin.blocks.edit template
     v1.1.1-v1.1.2 - шаблон attention
         - php artisan make:blocks --js
         - php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
