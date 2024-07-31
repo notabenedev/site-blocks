@@ -64,6 +64,22 @@
     }
   }
 
+  &-hero{
+    &__section{
+      min-height: 20rem;
+      padding: 2rem 0;
+      display: flex;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    &__container{
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+
   &-vacancy{
 
     &__img{

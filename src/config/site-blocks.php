@@ -30,6 +30,7 @@ return [
         "site-blocks::site.block-groups.templates.tab",
         "site-blocks::site.block-groups.templates.alert",
         "site-blocks::site.block-groups.templates.partner",
+        "site-blocks::site.block-groups.templates.hero",
     ],
 
     'fill' => array(
@@ -73,6 +74,11 @@ return [
             "slug" => "partner",
             "template" => "site-blocks::site.block-groups.templates.home-partner",
         ],
+        [
+            "title" => "Слоган",
+            "slug" => "hero",
+            "template" => "site-blocks::site.block-groups.templates.home-hero",
+        ]
     ),
     'fillGroups' => array(
        [

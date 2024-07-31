@@ -102,7 +102,7 @@ class Block extends Model
      */
     public function forgetCache()
     {
-        $templates = ["accordion", "about", "step", "vacancy", "benefit", "digit", "tab", "alert", "partner"];
+        $templates = ["accordion", "about", "step", "vacancy", "benefit", "digit", "tab", "alert", "partner", "hero"];
         foreach ($templates as $template) {
             Cache::forget("block-teaser:{$this->id}-{teaser-$template}");
         }
