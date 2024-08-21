@@ -9,17 +9,17 @@
         <div class="card">
             <div class="card-header">
                 <form action="{{ route($currentRoute) }}"
-                      class="form-inline"
+                      class="d-lg-inline-flex"
                       method="get">
                     <label class="sr-only" for="title">Блоки</label>
                     <input type="text"
-                           class="form-control mb-2 mr-sm-2"
+                           class="form-control mb-2 me-sm-2"
                            id="title"
                            name="title"
                            value="{{ $query->get('title') }}"
                            placeholder="Блоки">
 
-                    <select class="custom-select mb-2 mr-sm-2" name="group" aria-label="Группа ">
+                    <select class="custom-select mb-2 me-sm-2" name="group" aria-label="Группа ">
                         <option value="all"{{ ! $query->has('group') || $query->get('group') === 'all' ? " selected" : '' }}>
                             Все группы
                         </option>
@@ -30,7 +30,7 @@
                         @endforeach
                     </select>
 
-                    <button type="submit" class="btn btn-primary mb-2 mr-sm-1">Применить</button>
+                    <button type="submit" class="btn btn-primary mb-2 me-sm-1">Применить</button>
                     <a href="{{ route($currentRoute) }}" class="btn btn-secondary mb-2">Сбросить</a>
                 </form>
             </div>

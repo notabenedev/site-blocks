@@ -10,8 +10,7 @@
                 {!! $block->description !!}
             </div>
         @endisset
-        <button type="button" class="close blocks-alert__close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+        <button type="button" class="btn-close blocks-alert__close" data-bs-dismiss="alert" aria-label="Close">
         </button>
 </div>
 

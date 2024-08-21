@@ -2,7 +2,16 @@
 
 Описание версий и необходимые обновления
 
-## v1.1.5 - шаблон hero
+### v2.0.0 - base 5
+- Переписан на js: scripts/alert-cookie.js
+- Обновлены шаблоны: admin.block-groups.index, admin.blocks.index, admin.blocks.menu
+- Обновлены шаблоны: site.block-groups.templates.accordion, site.block-groups.templates.tab-pills, admin.blocks.teaser-[about, accordion, alert, hero]
+
+- Обновление
+
+
+    php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
+### v1.1.5 - шаблон hero
 - Выгрузка стилей
 
 
@@ -23,7 +32,7 @@
 
 
     php artisan make:blocks --fill
-## v1.1.4 - шаблон partner
+### v1.1.4 - шаблон partner
 - для работы шаблона в проекте с base-settings v3 потребуется создать фильтр widen-logo и стиль d-hover (включены в base-settings ^v4.1.5)
 - Set up new config params (if you need):
 
@@ -41,8 +50,8 @@
 
     php artisan make:blocks --fill
 
-## v1.1.3 - fix admin.blocks.edit template
-## v1.1.1-v1.1.2 - шаблон attention
+### v1.1.3 - fix admin.blocks.edit template
+### v1.1.1-v1.1.2 - шаблон attention
 
     
 
@@ -65,22 +74,22 @@
 
     php artisan make:blocks --fill
   
-## v1.1.0 - обновление Трейта 
+### v1.1.0 - обновление Трейта 
 - blockGroupsByTemplates(array)
 - blockGroupsNotInTemplates(array)
 
-## v1.0.17-v1.0.18 - обновления вывода табов:
+### v1.0.17-v1.0.18 - обновления вывода табов:
 - Добавлен шаблон home-tab-pills (в тч в конфиг, для вывода табов на отдельной странице)
 - Проверить переопределение шаблона: 
 
 
     site.block-groups.templates.tab-pills
 
-## v1.0.16 - обновления в админ панели групп и блоков:
+### v1.0.16 - обновления в админ панели групп и блоков:
 - группы - поиск по заголовку, типу
 - блоки - поиск по группе
 - редирект после удаления блока со страницы блока - на страницу группы 
-### Проверить переопределение:
+#### Проверить переопределение:
 
 
     шаблонов: 
@@ -89,10 +98,10 @@
     контроллеров:  
     Admin/BlockGroupController(index), Admin/BlocksController(destroy, index)
 
-## v1.0.15 - block title validator 
+### v1.0.15 - block title validator 
 пропустить не уникальный title
 
-## v1.0.14 - шаблон tab для отображения нескольких Групп блоков в виде Табов
+### v1.0.14 - шаблон tab для отображения нескольких Групп блоков в виде Табов
 - Set up new config params :
 
 
@@ -135,7 +144,7 @@
     $page->blockGroupsNotInTempletes(["site-blocks::site.block-groups.templates.tab"])
 Стандартный шаблон site-pages ^v3.1.0 содержит даннное разделение.
 
-##v1.0.13 - шаблон digit
+###v1.0.13 - шаблон digit
 - Выполните
 
 
@@ -159,7 +168,7 @@
 
         - php artisan make:blocks --fill 
 
-## v1.0.12 - шаблон benefit
+### v1.0.12 - шаблон benefit
 - Set up new config params to Config:
 
 
@@ -180,7 +189,7 @@
         php artisan make:blocks --fill
         php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
    
-## v1.0.11 - шаблон vacancy
+### v1.0.11 - шаблон vacancy
 - Config:
 
 
@@ -204,19 +213,19 @@
         - php artisan make:blocks --fill
         - php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
     
-##v1.0.10 - base 3 | 4, fix admin pills
-## v1.0.9 - добавлен флаг --remove-fill к команде конфигурации пакета
+###v1.0.10 - base 3 | 4, fix admin pills
+### v1.0.9 - добавлен флаг --remove-fill к команде конфигурации пакета
 
 Флаг позволяет удалить неиспользуемые дефолтные группы блоков, созданные ранее флагом --fill 
-###ВАЖНО
+####ВАЖНО
 после выполнения этой команды актуализируйте  конфиг site-blocks.fill (оставьте только используемые группы блоков)
 
-## v1.0.8 - откорректирвоан пункт меню Группы блоков для админ-интерфейса (проверка связки с другими моделями)
-## v1.0.7 - откорректирвоан редирект после удаления блока в админке (back())
-## v0.1.6 - изменен шаблон accordion-teaser  & scss blocks-accordion 
+### v1.0.8 - откорректирвоан пункт меню Группы блоков для админ-интерфейса (проверка связки с другими моделями)
+### v1.0.7 - откорректирвоан редирект после удаления блока в админке (back())
+### v0.1.6 - изменен шаблон accordion-teaser  & scss blocks-accordion 
         php artisan vendor:publish --provider="Notabenedev\SiteBlocks\SiteBlocksServiceProvider" --tag=public --force
 
-## v0.1.5 - шаблон steps
+### v0.1.5 - шаблон steps
 - Config:
 
 

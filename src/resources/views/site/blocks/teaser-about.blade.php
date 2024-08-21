@@ -13,6 +13,8 @@
                     "lightbox" => "blockGroup" . $block->slug,
                     "imgClass" => "img-fluid blocks-about__img",
                     "grid" => config("site-blocks.filters", [
+                            "xxl-grid-6" => 1400,
+                            "xl-grid-6" => 1200,
                             "lg-grid-6" => 992,
                             "md-grid-6" => 768
                         ]) ,

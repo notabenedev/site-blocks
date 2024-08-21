@@ -3,8 +3,8 @@
         <li class="nav-item" role="presentation">
             <button class="nav-link{{ $loop->first ? " active": "" }}"
                     id="pills-{{ $tab->slug }}-tab"
-                    data-toggle="pill"
-                    data-target="#pills-{{ $tab->slug }}"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-{{ $tab->slug }}"
                     type="button" role="tab"
                     aria-controls="pills-{{ $tab->slug }}"
                     aria-selected="{{ $loop->first ? "true": "false" }}">
