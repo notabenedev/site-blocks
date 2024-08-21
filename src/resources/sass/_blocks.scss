@@ -12,21 +12,6 @@
         margin-right: 1rem;
       }
     }
-
-    &__card{
-
-      &-header{
-
-      }
-
-      &-h2{
-
-      }
-
-      &-body{
-
-      }
-    }
   }
 
   &-accordion{
@@ -40,26 +25,6 @@
       }
       @include media-breakpoint-up(xl){
         margin-left: 1rem;
-      }
-    }
-
-    &__collapse{
-
-    }
-
-
-    &__card{
-
-      &-header{
-
-      }
-
-      &-body{
-
-      }
-
-      &-h2{
-
       }
     }
   }
@@ -90,31 +55,6 @@
       }
       @include media-breakpoint-up(xl){
         margin-left: 1rem;
-      }
-    }
-
-    &__card{
-
-      &-header{
-        border: 0;
-      }
-
-      &-btn{
-        padding-left: 0;
-        padding-right: 0;
-      }
-
-      &-body{
-
-      }
-
-      &-footer{
-        background-color: transparent;
-        padding-bottom: 0;
-      }
-
-      &-h2{
-
       }
     }
 
@@ -149,12 +89,6 @@
       &-content{
         margin: auto 0;
       }
-      &-title{
-
-      }
-      &-desc{
-
-      }
     }
   }
 
@@ -170,12 +104,6 @@
     }
     &__content{
       margin: auto 0;
-    }
-    &__title{
-
-    }
-    &__desc{
-
     }
   }
 
@@ -203,9 +131,6 @@
       font-size: xx-large;
       font-weight: bold;
       margin-top: 1rem;
-    }
-    &__desc{
-
     }
   }
   &-alert{

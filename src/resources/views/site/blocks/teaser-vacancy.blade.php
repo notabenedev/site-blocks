@@ -1,27 +1,25 @@
-<div class="card blocks-vacancy__card">
-    <div class="card-header blocks-vacancy__card-header" id="vacancyBlockGroup{{ $block->blockGroup->slug }}Heading{{ $block->slug }}">
-        <a class="btn btn-block blocks-vacancy__card-btn{{ !empty($first) ? "" : " collapsed" }}"
-           data-toggle="collapse"
-           data-target="#collapse{{ $block->slug }}"
+<div class="accordion-item  blocks-vacancy__card">
+    <div class="accordion-header blocks-vacancy__card-header" id="vacancyBlockGroup{{ $block->blockGroup->slug }}Heading{{ $block->slug }}">
+        <button class="accordion-button text-start blocks-vacancy__card-btn{{ !empty($first) ? "" : " collapsed" }}"
+           data-bs-toggle="collapse"
+           data-bs-target="#collapse{{ $block->slug }}"
            aria-expanded="{{ !empty($first) ? "true" : "false" }}"
            aria-controls="collapse{{ $block->slug }}">
-            <h2 class="mb-0 blocks-vacancy__card-h2 text-left">
-                {{ $block->title }}
-            </h2>
-        </a>
+            <h2 class="blocks-vacancy__card-h2 mb-0">{{ $block->title }}</h2>
+        </button>
     </div>
 
     <div id="collapse{{ $block->slug }}"
-         class="collapse blocks-vacancy__collapse{{ !empty($first) ? " show" : "" }}"
+         class="accordion-collapse collapse blocks-vacancy__collapse{{ !empty($first) ? " show" : "" }}"
          aria-labelledby="vacancyBlockGroup{{ $block->blockGroup->slug }}Heading{{ $block->slug }}"
-         data-parent="#vacancyBlockGroup{{ $block->blockGroup->slug }}">
-        <div class="card-footer blocks-vacancy__card-footer">
-            <h3 class="blocks-vacancy__short">
-                {{ $block->short }}
-            </h3>
-        </div>
-        <div class="card-body blocks-vacancy__card-body">
-            <div  class="{{ config("site-blocks.floatImgVacancyTemplate", "float-md-right") }}">
+         data-bs-parent="#vacancyBlockGroup{{ $block->blockGroup->slug }}">
+        <div class="accordion-body clearfix blocks-vacancy__card-body">
+            <div class="accordion-footer blocks-vacancy__card-footer">
+                <h3 class="blocks-vacancy__short">
+                    {{ $block->short }}
+                </h3>
+            </div>
+            <div  class="{{ config("site-blocks.floatImgVacancyTemplate", "float-md-end") }}">
                 @if ($block->image)
                     @img([
                     "image" => $block->image,
@@ -29,6 +27,8 @@
                     "lightbox" => "blockGroup" . $block->slug,
                     "imgClass" => "img-fluid blocks-vacancy__img",
                     "grid" => [
+                    "xxl-grid-4" => 1400,
+                    "xl-grid-4" => 1200,
                     "lg-grid-4" => 992,
                     "md-grid-6" => 768
                     ],

@@ -1,6 +1,6 @@
 <div class="accordion-item blocks-accordion__card">
     <div class="accordion-header blocks-accordion__card-header" id="accordionBlockGroup{{ $block->blockGroup->slug }}Heading{{ $block->slug }}">
-        <a class="accordion-button text-start{{ !empty($first) ? "" : " collapsed" }}"
+        <button class="accordion-button text-start{{ !empty($first) ? "" : " collapsed" }}"
            data-bs-toggle="collapse"
            data-bs-target="#collapse{{ $block->slug }}"
            aria-expanded="{{ !empty($first) ? "true" : "false" }}"
@@ -8,7 +8,7 @@
             <h2 class="mb-0 blocks-accordion__card-h2">
                 {{ $block->title }}
             </h2>
-        </a>
+        </button>
     </div>
 
     <div id="collapse{{ $block->slug }}"

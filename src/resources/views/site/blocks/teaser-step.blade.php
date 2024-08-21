@@ -16,8 +16,9 @@
                                     "lightbox" => "blockGroup" . $block->slug,
                                     "imgClass" => "img-fluid blocks-step__img",
                                     "grid" => config("site-blocks.filters", [
-                                    "lg-grid-6" => 992,
-                                    "md-grid-6" => 768
+                                    "lg-grid-3" => 992,
+                                    "md-grid-6" => 768,
+                                    "sm-grid-6" => 576
                                     ]) ,
                                     ])
                             </div>

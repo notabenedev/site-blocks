@@ -6,6 +6,8 @@
         "template" => "sm-grid-12",
         "imgClass" => "card-img-top",
         "grid" => config("site-blocks.filtersTab", [
+        "xxl-grid-4" => 1400,
+        "xl-grid-4" => 1200,
         "lg-grid-4" => 992,
         "md-grid-6" => 768
         ]) ,
