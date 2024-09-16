@@ -13,7 +13,7 @@
                 @endisset
                 <span>{{ config("site-blocks.sitePackageName") }}</span>
             </a>
-            <div id="collapse-blocks-groups-menu" class="collapse{{ $active ? " show" : "" }}" data-parent="#accordionSidebar">
+            <div id="collapse-blocks-groups-menu" class="collapse{{ $active ? " show" : "" }}" data-bs-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a href="{{ route('admin.blocks.index') }}"
                        class="collapse-item{{ (strstr($currentRoute, 'admin.blocks.') !== FALSE && strstr($currentRoute, 'admin.blocks.groups') == FALSE)  ? " active" : "" }}">
@@ -32,7 +32,7 @@
                href="#"
                id="blocks-groups-dropdown"
                role="button"
-               data-toggle="dropdown"
+               data-bs-toggle="dropdown"
                aria-haspopup="true"
                aria-expanded="false">
                 @isset($ico)
