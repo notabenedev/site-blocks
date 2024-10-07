@@ -171,7 +171,7 @@ class BlocksMakeCommand extends BaseConfigModelCommand
                 try {
                     $group = BlockGroup::query()
                         ->where("slug", $fill["slug"])
-                        ->where('title', $fill["title"])
+                        ->orWhere('title', $fill["title"])
                         ->firstOrFail();
                     $group->update($fill);
                     $this->info("Группа блоков ".$fill["title"]." обновлена");
