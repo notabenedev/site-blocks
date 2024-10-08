@@ -19,7 +19,7 @@
                     @if(! empty($modelName = \App\BlockGroup::getBlockGroupModelName($group->block_groupable_type)))
                         <dt class="col-sm-3">Объект:</dt>
                         <dd class="col-sm-9">
-                            <a href="{{ route("admin.$modelName.show", ["page" => $group->blockGroupable]) }}">
+                            <a href="{{ route("admin.$modelName.show", [stristr($modelName,"s", true) => $group->blockGroupable]) }}">
                                 {{ $group->blockGroupable->title }}
                             </a>
                         </dd>
